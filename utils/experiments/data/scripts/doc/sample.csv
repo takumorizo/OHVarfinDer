@@ -1,0 +1,7 @@
+[bam_tofastq]
+HCC1143_n100,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1143.NORMAL.30x.compare.bam
+HCC1143_n60t40,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1143.mix1.n60t40.bam
+HCC1143_n40t60,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1143.mix1.n40t60.bam
+HCC1954_n100,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1954.NORMAL.30x.compare.bam
+HCC1954_n60t40,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1954.mix1.n60t40.bam
+HCC1954_n40t60,/home/moriyama/work/OHVarfinDer/realWhole/testDownloads/HCC1954.mix1.n40t60.bam
