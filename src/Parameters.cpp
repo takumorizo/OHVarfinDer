@@ -43,7 +43,7 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     
     a.add("quiet", '\0', "quiet output");
     
-    a.add<double>("priorSNP", '\0', "prior probability of a SNP site", false, 1.0);
+    a.add<double>("priorSNP", '\0', "prior probability of a SNP site", false, 1.0 / 100.0);
     a.add<double>("priorIndel", '\0', "prior probability of a detected indel not being a sequencing error", false, 1.0 / 10000.0);
     a.add<int>("maxReads", '\0', "maximum number of reads in a window", false, 20000);
     a.add<int>("minReads", '\0', "minimum number of reads", false, 4);

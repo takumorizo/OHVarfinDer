@@ -174,8 +174,8 @@ private:
     
     double getPriorRatio(CandidateWindow window){
         bool isIndel = ( window.target.ref == "-" || window.target.obs == "-" );
-        if(isIndel){ return params.priorSNP;   }
-        else {       return params.priorIndel; }
+        if(isIndel){ return params.priorIndel;   }
+        else {       return params.priorSNP;     }
     }
     void setTNReads(std::string chr, int pos,
                     int maxInsertSize, const CandidateWindow &window, std::vector<Variant> &closeVariants,
