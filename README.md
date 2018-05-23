@@ -52,3 +52,19 @@ This implementation forked from the program [HapMuC][hapmuc] and [Dindel][dindel
 [dindel]: http://www.sanger.ac.uk/resources/software/dindel/
 [hapmuc]: https://github.com/usuyama/hapmuc
 
+Note: installing @ HGC shirokane super computer
+----------
+If you have problem around preparing build dependencies, i.e., make dependencies, please try to compile dependencies at login node.
+
+To prepare them, please execute the following script in your shell @ login node.:
+```sh
+% make dependencies
+```
+
+### Build OHVarfinDer ###
+Just execute the following script in your shell after you qlogin:
+```sh
+% qlogin
+% make
+```
+
