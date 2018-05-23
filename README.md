@@ -30,11 +30,11 @@ How to run
 ----------
 
 ```sh
-sh ./utils/runOHVarfinDer.sh ${ReferenceSequence} ${TumorBam} ${NormalBam} ${OutputDir} ${Region}
+sh ./utils/runOHVarfinDer.sh ${referenceSequence} ${tumorBam} ${normalBam} ${outputDir} ${region}
 ```
-ReferenceSequence  : reference sequence used for generating TumorBam and NormalBam
-OutputDir : output files of ${OutputDir}/output.variant, ${OutputDir}/output.filt.variant is generated
-Region : ex) chr1:1-1000, same as samtools mpileup region specification.
+referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
+outputDir : output files of ${outputDir}/output.variant, ${outputDir}/output.filt.variant is generated
+region : ex) chr1:1-1000, same as samtools mpileup region specification.
 
 
 Publication
@@ -52,7 +52,7 @@ This implementation forked from the program [HapMuC][hapmuc] and [Dindel][dindel
 [dindel]: http://www.sanger.ac.uk/resources/software/dindel/
 [hapmuc]: https://github.com/usuyama/hapmuc
 
-Note: installing @ HGC shirokane super computer
+Note: installing @ HGC SHIROKANE super computer
 ----------
 If you have problem around preparing build dependencies, i.e., make dependencies, please try to compile dependencies at login node.
 
