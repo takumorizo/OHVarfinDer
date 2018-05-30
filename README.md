@@ -36,6 +36,21 @@ referenceSequence  : reference sequence used for generating ${tumorBam} and ${no
 outputDir : output files of ${outputDir}/output.variant, ${outputDir}/output.filt.variant is generated
 region : ex) chr1:1-1000, same as samtools mpileup region specification.
 
+Convert to VCF
+----------
+
+```sh
+python ./utils/toVCF.py ${referenceSequence} ${output} ${outputVCF}
+```
+referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
+output : An output file of output.variant or output.filt.variant
+outputVCF : ex) chr1:1-1000, same as samtools mpileup region specification.
+
+The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
+```sh
+pip install pysam
+```
+
 
 Publication
 ----------
