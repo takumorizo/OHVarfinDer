@@ -32,9 +32,11 @@ How to run
 ```sh
 sh ./utils/runOHVarfinDer.sh ${referenceSequence} ${tumorBam} ${normalBam} ${outputDir} ${region}
 ```
-referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
-outputDir : output files of ${outputDir}/output.variant, ${outputDir}/output.filt.variant is generated
-region : ex) chr1:1-1000, same as samtools mpileup region specification.
+referenceSequence : The reference sequence used for generating ${tumorBam} and ${normalBam}  
+tumorBam: The bam file for tumor sample.  
+normalBam: The bam file for normal sample.  
+outputDir : Output files of ${outputDir}/output.variant, ${outputDir}/output.filt.variant is generated  
+region : ex) chr1:1-1000, same as samtools mpileup region specification.  
 
 Convert to VCF
 ----------
@@ -42,11 +44,11 @@ Convert to VCF
 ```sh
 python ./utils/toVCF.py ${referenceSequence} ${output} ${outputVCF}
 ```
-referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
-output : An output file of output.variant or output.filt.variant
-outputVCF : ex) chr1:1-1000, same as samtools mpileup region specification.
+referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}  
+output : An output file of ${outputDir}/output.variant or ${outputDir}/output.filt.variant  
+outputVCF : An output VCF file path.  
 
-The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
+The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.  
 ```sh
 pip install pysam
 ```
@@ -54,10 +56,9 @@ pip install pysam
 Post filtering recommendation
 ----------
 We recommend to remove the following low mapping positions or SNP positions from the outputs.
-
-genomic super duplications: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/simpleRepeat.txt.gz
-simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
-dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
+* genomic super duplications: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/simpleRepeat.txt.gz
+* simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
+* dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
 
 
 Publication
