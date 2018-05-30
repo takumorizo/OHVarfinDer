@@ -13,7 +13,8 @@ declare -a filterArray=(\
 "ignore_BF_Computation"
 )
 
-filterExpression=""
-for ((i = 0; i < ${#filterArray[@]}; i++)) {
-	filterExpression=" | grep -v ${filterArray[i]}"
+filterExpression="\"${filterArray[0]}"
+for ((i = 1; i < ${#filterArray[@]}; i++)) {
+	filterExpression="${filterExpression}|${filterArray[i]}"
 }
+filterExpression="${filterExpression}\""

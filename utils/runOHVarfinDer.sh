@@ -1,12 +1,14 @@
 #! /bin/bash
 
+readonly DIR=`dirname ${0}`
+
 readonly REF=$1
 readonly TUMOR=$2
 readonly NORMAL=$3
 readonly OUTPUTDIR=$4
 readonly REGION=${5-""}
-readonly PARAM=${6-./params/params.sh}
-readonly FILTER=${7-./params/filterList.sh}
+readonly PARAM=${6-${DIR}/params/params.sh}
+readonly FILTER=${7-${DIR}/params/filterList.sh}
 source ${PARAM}
 source ${FILTER}
 
@@ -54,7 +56,7 @@ exit 1
 echo "check_mkdir ${OUTPUTDIR}"
 check_mkdir ${OUTPUTDIR}
 
-echo "../bin/ohvarfinder \
+echo "${DIR}/../bin/ohvarfinder \
 --algorithm OHVarfinDer2 \
 -f ${REF}    \
 -a ${TUMOR}  \
@@ -94,10 +96,10 @@ echo "../bin/ohvarfinder \
 --heteroSNPMinAvgBaseQuality=${heteroSNPMinAvgBaseQuality} \
 --triAlleleMinObsRate=${triAlleleMinObsRate} \
 --triAlleleMinObsNum=${triAlleleMinObsNum} \
---pileUpBufferSize=4000000 \
+--pileUpBufferSize=${pileUpBufferSize} \
 ${isSingle} \
 -R ${REGION}"
-../bin/ohvarfinder \
+${DIR}/../bin/ohvarfinder \
 --algorithm OHVarfinDer2 \
 -f ${REF}    \
 -a ${TUMOR}  \
@@ -141,8 +143,8 @@ ${isSingle} \
 ${isSingle} \
 -R ${REGION}
 
-echo "eval \" cat ${OUTPUTDIR}/output.calls.txt ${filterExpression} | python ./rmSNP.py > ${OUTPUTDIR}/output.filt.variant\" "
-eval "cat ${OUTPUTDIR}/output.calls.txt ${filterExpression} | python ./rmSNP.py > ${OUTPUTDIR}/output.filt.variant"
+echo "cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.filt.variant"
+cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.filt.variant
 
-echo "cat ${OUTPUTDIR}/output.calls.txt | python ./rmSNP.py > ${OUTPUTDIR}/output.variant"
-cat ${OUTPUTDIR}/output.calls.txt | python ./rmSNP.py > ${OUTPUTDIR}/output.variant
+echo "cat ${OUTPUTDIR}/output.calls.txt | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.variant"
+cat ${OUTPUTDIR}/output.calls.txt | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.variant
