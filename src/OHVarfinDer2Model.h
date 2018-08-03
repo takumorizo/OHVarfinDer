@@ -33,6 +33,7 @@ public:
     const int  updateCount;
     const double minLqConvergence;
     const int thresModelChangeDepth;
+    const double ln2;
     typedef enum { SUCCESS, UMBALANCED_NORMAL_HAPLOTYPE } State;
     struct Result {
         Parameters::BayesEMParameters posterior;

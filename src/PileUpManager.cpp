@@ -106,7 +106,7 @@ std::vector<CandidateWindow> PileUpManager::searchCandidateWindow(Parameters par
     }
     LOG(logINFO) << " allVariants.size :" << allVariants.size() << std::endl;
     // make Candidate Windows
-    int maxWindow = 2 * (parameters.maxInsertSize + parameters.maxReadLength);
+    int maxWindow = (parameters.maxInsertSize + parameters.maxReadLength);
     VariantUtils::makeWindowsFromSortedCandidates(allVariants, allWindows, parameters.heteroSNPConfidenceInterval, parameters.minDistanceGermlineIndel, maxWindow);
     LOG(logINFO) << " size of all windows  :" << allWindows.size() << std::endl;
 

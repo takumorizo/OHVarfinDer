@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include "ModelUtils.h"
 #include "log.h"
+#include <math.h>
 
 // TODO : remove comments
 OHVarfinDer2Model::OHVarfinDer2Model(const std::vector<std::vector<double> > &tumorLiks_, const std::vector<std::vector<double> > &normalLiks_,
@@ -18,7 +19,8 @@ OHVarfinDer2Model::OHVarfinDer2Model(const std::vector<std::vector<double> > &tu
                                    const Parameters::BayesEMParameters &prior_,
                                    int updateCount_ , double minLqConvergence_, int thresModelChangeDepth_):
 tumorLiks(tumorLiks_), normalLiks(normalLiks_), tumorIndicator(tumorIndicator_), normalIndicator(normalIndicator_),
-prior(prior_),updateCount(updateCount_), minLqConvergence(minLqConvergence_), thresModelChangeDepth(thresModelChangeDepth_) {
+prior(prior_),updateCount(updateCount_), minLqConvergence(minLqConvergence_), thresModelChangeDepth(thresModelChangeDepth_),
+ln2(log(2.0)) {
     if (tumorLiks.size() == 0) {
         LOG(logINFO) << "tumorLiks.size() == 0 " << std::endl;
         throw std::string("tumorLiks.size() == 0");
@@ -71,9 +73,9 @@ std::vector<double> OHVarfinDer2Model::evaluateEqContentsTumor(
         if( allIndicatorInLine[at(i,10)] != 0 ) EqContents[at(i,10)] =  (  digPIH[2]                                         + allLiksInLine[at(i,10)] ) ;
         if( allIndicatorInLine[at(i,11)] != 0 ) EqContents[at(i,11)] =  (  digPIH[1]  + digEPSL[0] + digEPSL[0]              + allLiksInLine[at(i,11)] ) ;
         if( allIndicatorInLine[at(i,12)] != 0 ) EqContents[at(i,12)] =  (  digEPSB[0] + digPIH[0]  + digEPSL[0]              + allLiksInLine[at(i,12)] ) ;
-        if( allIndicatorInLine[at(i,13)] != 0 ) EqContents[at(i,13)] =  (  digEPSB[0] + digPIH[1]  + digEPSL[1] + digEPSL[0] + allLiksInLine[at(i,13)] ) ;
+        if( allIndicatorInLine[at(i,13)] != 0 ) EqContents[at(i,13)] =  (  ln2 + digEPSB[0] + digPIH[1]  + digEPSL[1] + digEPSL[0] + allLiksInLine[at(i,13)] ) ;
         if( allIndicatorInLine[at(i,14)] != 0 ) EqContents[at(i,14)] =  (  digEPSB[1] + digPIH[0]  + digEPSL[0]              + allLiksInLine[at(i,14)] ) ;
-        if( allIndicatorInLine[at(i,15)] != 0 ) EqContents[at(i,15)] =  (  digEPSB[1] + digPIH[1]  + digEPSL[0] + digEPSL[1] + allLiksInLine[at(i,15)] ) ;
+        if( allIndicatorInLine[at(i,15)] != 0 ) EqContents[at(i,15)] =  (  ln2 + digEPSB[1] + digPIH[1]  + digEPSL[0] + digEPSL[1] + allLiksInLine[at(i,15)] ) ;
 
         if( allIndicatorInLine[at(i,16)] != 0 ) EqContents[at(i,16)] =  (  digPIF[0]              + allLiksInLine[at(i,16)] ) ;
         if( allIndicatorInLine[at(i,17)] != 0 ) EqContents[at(i,17)] =  (  digEPSB[1] + digPIF[1] + allLiksInLine[at(i,17)] ) ;
@@ -94,8 +96,8 @@ std::vector<double> OHVarfinDer2Model::evaluateEqContentsError(
     for(int i = 0; i < readsNum ; i++){
         if( allIndicatorInLine[at(i,0)] != 0 )  EqContents[at(i,0)]  =  (  2 * digEPSL[1]                                    + allLiksInLine[at(i,0)] ) ;
         if( allIndicatorInLine[at(i,1)] != 0 )  EqContents[at(i,1)]  =  (  2 * digEPSL[0]                                    + allLiksInLine[at(i,1)] ) ;
-        if( allIndicatorInLine[at(i,2)] != 0 )  EqContents[at(i,2)]  =  (  digEPSB[0] + digEPSL[0] + digEPSL[1]              + allLiksInLine[at(i,2)] ) ;
-        if( allIndicatorInLine[at(i,3)] != 0 )  EqContents[at(i,3)]  =  (  digEPSB[1] + digEPSL[0] + digEPSL[1]              + allLiksInLine[at(i,3)] ) ;
+        if( allIndicatorInLine[at(i,2)] != 0 )  EqContents[at(i,2)]  =  (  ln2 + digEPSB[0] + digEPSL[0] + digEPSL[1]              + allLiksInLine[at(i,2)] ) ;
+        if( allIndicatorInLine[at(i,3)] != 0 )  EqContents[at(i,3)]  =  (  ln2 + digEPSB[1] + digEPSL[0] + digEPSL[1]              + allLiksInLine[at(i,3)] ) ;
 
         if( allIndicatorInLine[at(i,4)] != 0 )  EqContents[at(i,4)]  =  (  digPIEH[0] + digEPSH[1]                           + allLiksInLine[at(i,4)] ) ;
         if( allIndicatorInLine[at(i,5)] != 0 )  EqContents[at(i,5)]  =  (  digPIEH[1] + digEPSH[1]                           + allLiksInLine[at(i,5)] ) ;
@@ -106,10 +108,10 @@ std::vector<double> OHVarfinDer2Model::evaluateEqContentsError(
         if( allIndicatorInLine[at(i,9)] != 0 )  EqContents[at(i,9)]  =  (  digPIEH[1] + digEPSL[1] + digEPSL[1]              + allLiksInLine[at(i,9)] ) ;
         if( allIndicatorInLine[at(i,10)] != 0 ) EqContents[at(i,10)] =  (  digPIEH[0] + digEPSL[0] + digEPSL[0]              + allLiksInLine[at(i,10)] ) ;
         if( allIndicatorInLine[at(i,11)] != 0 ) EqContents[at(i,11)] =  (  digPIEH[1] + digEPSL[0] + digEPSL[0]              + allLiksInLine[at(i,11)] ) ;
-        if( allIndicatorInLine[at(i,12)] != 0 ) EqContents[at(i,12)] =  (  digPIEH[0] + digEPSL[0] + digEPSL[1] + digEPSB[0] + allLiksInLine[at(i,12)] ) ;
-        if( allIndicatorInLine[at(i,13)] != 0 ) EqContents[at(i,13)] =  (  digPIEH[1] + digEPSL[0] + digEPSL[1] + digEPSB[0] + allLiksInLine[at(i,13)] ) ;
-        if( allIndicatorInLine[at(i,14)] != 0 ) EqContents[at(i,14)] =  (  digPIEH[0] + digEPSL[0] + digEPSL[1] + digEPSB[1] + allLiksInLine[at(i,14)] ) ;
-        if( allIndicatorInLine[at(i,15)] != 0 ) EqContents[at(i,15)] =  (  digPIEH[1] + digEPSL[0] + digEPSL[1] + digEPSB[1] + allLiksInLine[at(i,15)] ) ;
+        if( allIndicatorInLine[at(i,12)] != 0 ) EqContents[at(i,12)] =  (  ln2 + digPIEH[0] + digEPSL[0] + digEPSL[1] + digEPSB[0] + allLiksInLine[at(i,12)] ) ;
+        if( allIndicatorInLine[at(i,13)] != 0 ) EqContents[at(i,13)] =  (  ln2 + digPIEH[1] + digEPSL[0] + digEPSL[1] + digEPSB[0] + allLiksInLine[at(i,13)] ) ;
+        if( allIndicatorInLine[at(i,14)] != 0 ) EqContents[at(i,14)] =  (  ln2 + digPIEH[0] + digEPSL[0] + digEPSL[1] + digEPSB[1] + allLiksInLine[at(i,14)] ) ;
+        if( allIndicatorInLine[at(i,15)] != 0 ) EqContents[at(i,15)] =  (  ln2 + digPIEH[1] + digEPSL[0] + digEPSL[1] + digEPSB[1] + allLiksInLine[at(i,15)] ) ;
 
         if( allIndicatorInLine[at(i,16)] != 0 ) EqContents[at(i,16)] =  (  digEPSS[1]                                        + allLiksInLine[at(i,16)] ) ;
         if( allIndicatorInLine[at(i,17)] != 0 ) EqContents[at(i,17)] =  (  digEPSS[0] + digEPSB[1]                           + allLiksInLine[at(i,17)] ) ;
