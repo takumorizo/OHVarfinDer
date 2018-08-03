@@ -109,35 +109,6 @@ int main(int argc, const char *argv[]){
                 exit(1);
             }
         }
-    }else if(parameters.method == Parameters::READPROBCOUNTER){
-        MaxReadProbCounter counter = MaxReadProbCounter(tumorBamReader, normalBamReader,parameters,fai);
-        outStream << MaxReadProbCounter::getHeader() << std::endl;
-        for(int i = 0; i < allWindows.size(); i++)if(allWindows[i].info.ref_count_tumor != "-1"){
-            try {
-                outStream << counter.count(allWindows[i]) << std::endl;
-            } catch (std::string &s) {
-                LOG(logERROR) << "something unexpected happened. exit." << std::endl;
-                LOG(logERROR) << s << std::endl;
-                exit(1);
-            }
-        }
-    }else if(parameters.method == Parameters::OHVARFINDER2NOCATEGORY){
-        outStream << MutationCallResult::getHeader() << std::endl;
-        LOG(logINFO) << " start Ohvarfinder2 algorithm" << std::endl;
-        OHVarfinDer2NoCategory caller = OHVarfinDer2NoCategory(tumorBamReader, normalBamReader,parameters,fai);
-        
-        for(int i = 0; i < allWindows.size(); i++){
-            try {
-                MutationCallResult result = caller.call(allWindows[i]);
-                outStream << result.getOutput() << std::endl;
-                LOG(logDEBUG) << result.getOutput() << std::endl;
-                std::cout << result.getOutput() << std::endl;
-            } catch (std::string &s) {
-                LOG(logERROR) << "something unexpected happened. exit." << std::endl;
-                LOG(logERROR) << s << std::endl;
-                exit(1);
-            }
-        }
     }else{
         LOG(logERROR) << "unknown algorithm specified." << std::endl;
         exit(1);

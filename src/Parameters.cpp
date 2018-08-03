@@ -135,28 +135,6 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     a.add<std::string>("ohvar2_errAlphaS_W",  '\0', "ohvar2_errAlphaS_W", false, "2.0,30.0");
     a.add<std::string>("ohvar2_errAlphaB_W",  '\0', "ohvar2_errAlphaB_W", false, "0.5,0.5");
     
-    a.add<std::string>("ohvar2_noCategory_mutGammaF", '\0', "ohvar2_noCategory_mutGammaF", false, "10.0,1.0");
-    a.add<std::string>("ohvar2_noCategory_mutGammaH", '\0', "ohvar2_noCategory_mutGammaH", false, "5.0,5.0,1.0");
-    a.add<std::string>("ohvar2_noCategory_mutAlphaL", '\0', "ohvar2_noCategory_mutAlphaL", false, "1.0,100.0");
-    a.add<std::string>("ohvar2_noCategory_mutAlphaH", '\0', "ohvar2_noCategory_mutAlphaH", false, "1.0,100.0");
-    a.add<std::string>("ohvar2_noCategory_mutAlphaB", '\0', "ohvar2_noCategory_mutAlphaB", false, "5.0,5.0");
-    a.add<std::string>("ohvar2_noCategory_mutGammaEH", '\0', "ohvar2_noCategory_mutGammaEH",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_noCategory_mutAlphaS",  '\0', "ohvar2_noCategory_mutAlphaS", false, "1.0,100.0");
-
-    a.add<std::string>("ohvar2_noCategory_mutAlphaB_E",  '\0', "ohvar2_noCategory_mutAlphaB_N", false, "50.0,50.0");
-    a.add<std::string>("ohvar2_noCategory_mutAlphaB_W",  '\0', "ohvar2_noCategory_mutAlphaB_N", false, "5.0,5.0");
-
-    a.add<std::string>("ohvar2_noCategory_errAlphaL_E",  '\0', "ohvar2_noCategory_errAlphaL_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaH_E",  '\0', "ohvar2_noCategory_errAlphaH_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errGammaEH_E", '\0', "ohvar2_noCategory_errGammaEH_E",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaS_E",  '\0', "ohvar2_noCategory_errAlphaS_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaB_E",  '\0', "ohvar2_noCategory_errAlphaB_E", false, "0.5,0.5");
-
-    a.add<std::string>("ohvar2_noCategory_errAlphaL_W",  '\0', "ohvar2_noCategory_errAlphaL_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaH_W",  '\0', "ohvar2_noCategory_errAlphaH_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errGammaEH_W", '\0', "ohvar2_noCategory_errGammaEH_W",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaS_W",  '\0', "ohvar2_noCategory_errAlphaS_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_noCategory_errAlphaB_W",  '\0', "ohvar2_noCategory_errAlphaB_W", false, "0.5,0.5");
     a.parse_check(argc, argv);
     
     maxReads = a.get<int>("maxReads");
@@ -241,8 +219,6 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     if(     algorithmType == "OHVarfinDer2")           method = Parameters::OHVARFINDER2;
     else if(algorithmType == "HapMuC")                 method = Parameters::HAPMUC;
     else if(algorithmType == "HeteroSNPCall")          method = Parameters::HETEROSNPCALL;
-    else if(algorithmType == "ReadProbCounter")        method = Parameters::READPROBCOUNTER;
-    else if(algorithmType == "OHVarfinDer2NoCategory") method = Parameters::OHVARFINDER2NOCATEGORY;
     else                                               throw std::string(" unknown Algorithm type specified ");
     
     if(method == Parameters::OHVARFINDER2)                getFromCommandLineArgumentsInOHVarfinDer2(a,argc,argv);
@@ -284,56 +260,4 @@ void Parameters::getFromCommandLineArgumentsInOHVarfinDer2(cmdline::parser& a, i
     parseHyperParameters(OHVarfinDParams2.err_h0, a.get<std::string>("ohvar2_errGammaEH_W"));
     parseHyperParameters(OHVarfinDParams2.err_i0, a.get<std::string>("ohvar2_errAlphaS_W"));
     parseHyperParameters(OHVarfinDParams2.err_j0, a.get<std::string>("ohvar2_errAlphaB_W"));
-}
-
-void Parameters::getFromCommandLineArgumentsInOHVarfinDer2NoCategory(cmdline::parser& a, int argc, const char *argv[]){
-    OHVarfinDParams2NoCategory.clear_all();
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_a0, a.get<std::string>("ohvar2_noCategory_mutGammaF"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_b0, a.get<std::string>("ohvar2_noCategory_mutGammaH"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_c0, a.get<std::string>("ohvar2_noCategory_mutAlphaL"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_d0, a.get<std::string>("ohvar2_noCategory_mutAlphaH"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_e0, a.get<std::string>("ohvar2_noCategory_mutGammaEH"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_f0, a.get<std::string>("ohvar2_noCategory_mutAlphaS"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_g0, a.get<std::string>("ohvar2_noCategory_mutAlphaB_E"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_h0, a.get<std::string>("ohvar2_noCategory_mutAlphaB_W"));
-
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_a0, a.get<std::string>("ohvar2_noCategory_errAlphaL_E"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_b0, a.get<std::string>("ohvar2_noCategory_errAlphaH_E"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_c0, a.get<std::string>("ohvar2_noCategory_errGammaEH_E"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_d0, a.get<std::string>("ohvar2_noCategory_errAlphaS_E"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_e0, a.get<std::string>("ohvar2_noCategory_errAlphaB_E"));
-
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_f0, a.get<std::string>("ohvar2_noCategory_errAlphaL_W"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_g0, a.get<std::string>("ohvar2_noCategory_errAlphaH_W"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_h0, a.get<std::string>("ohvar2_noCategory_errGammaEH_W"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_i0, a.get<std::string>("ohvar2_noCategory_errAlphaS_W"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_j0, a.get<std::string>("ohvar2_noCategory_errAlphaB_W"));
-
-
-/*
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_a0, a.get<std::string>("ohvar2_noCategory_mutGammaF_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_b0, a.get<std::string>("ohvar2_noCategory_mutGammaH_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_c0, a.get<std::string>("ohvar2_noCategory_mutAlphaL_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_d0, a.get<std::string>("ohvar2_noCategory_mutAlphaH_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_e0, a.get<std::string>("ohvar2_noCategory_mutAlphaB_T"));
-
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_f0, a.get<std::string>("ohvar2_noCategory_mutAlphaL_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_g0, a.get<std::string>("ohvar2_noCategory_mutAlphaH_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_h0, a.get<std::string>("ohvar2_noCategory_mutGammaEH_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_i0, a.get<std::string>("ohvar2_noCategory_mutAlphaS_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.mut_j0, a.get<std::string>("ohvar2_noCategory_mutAlphaB_N"));    
-    
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_a0, a.get<std::string>("ohvar2_noCategory_errAlphaL_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_b0, a.get<std::string>("ohvar2_noCategory_errAlphaH_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_c0, a.get<std::string>("ohvar2_noCategory_errGammaEH_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_d0, a.get<std::string>("ohvar2_noCategory_errAlphaS_T"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_e0, a.get<std::string>("ohvar2_noCategory_errAlphaB_T"));
-
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_f0, a.get<std::string>("ohvar2_noCategory_errAlphaL_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_g0, a.get<std::string>("ohvar2_noCategory_errAlphaH_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_h0, a.get<std::string>("ohvar2_noCategory_errGammaEH_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_i0, a.get<std::string>("ohvar2_noCategory_errAlphaS_N"));
-    parseHyperParameters(OHVarfinDParams2NoCategory.err_j0, a.get<std::string>("ohvar2_noCategory_errAlphaB_N"));
-*/
-    
 }
