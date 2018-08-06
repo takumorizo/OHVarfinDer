@@ -22,11 +22,9 @@
 #include "CandidateWindow.h"
 #include "VariantUtils.h"
 #include "OHVarfinDer2.h"
-#include "OHVarfinDer2NoCategory.h"
 #include "BaseMutationCaller.h"
 #include "PileUpManager.h"
 #include "MutationCaller.h"
-#include "MaxReadProbCounter.h"
 
 // SAMTOOLS is predefined in the compiling
 int main(int argc, const char *argv[]){
