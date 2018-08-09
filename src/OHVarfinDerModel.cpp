@@ -6,7 +6,7 @@
 //  Copyright © 2016年 森山卓也. All rights reserved.
 //
 
-#include "OHVarfinDer2Model.h"
+#include "OHVarfinDerModel.h"
 #include <vector>
 #include <cstdlib>
 #include "ModelUtils.h"
@@ -14,7 +14,7 @@
 #include <math.h>
 
 // TODO : remove comments
-OHVarfinDer2Model::OHVarfinDer2Model(const std::vector<std::vector<double> > &tumorLiks_, const std::vector<std::vector<double> > &normalLiks_,
+OHVarfinDerModel::OHVarfinDerModel(const std::vector<std::vector<double> > &tumorLiks_, const std::vector<std::vector<double> > &normalLiks_,
                                    const std::vector<std::vector<int> > &tumorIndicator_, const std::vector<std::vector<int> > &normalIndicator_,
                                    const Parameters::BayesEMParameters &prior_,
                                    int updateCount_ , double minLqConvergence_, int thresModelChangeDepth_):
@@ -39,7 +39,7 @@ ln2(log(2.0)) {
     }
 }
 
-void OHVarfinDer2Model::updateParams(std::vector<double>& param, const std::vector<std::vector<int> > &rule,
+void OHVarfinDerModel::updateParams(std::vector<double>& param, const std::vector<std::vector<int> > &rule,
                                      const std::vector<double> &EZ, const std::vector<int> &allIndicatorInLine,
                                      int readNum){
     for(int j = 0; j < rule.size(); j++ ){
@@ -52,7 +52,7 @@ void OHVarfinDer2Model::updateParams(std::vector<double>& param, const std::vect
     }
 }
 
-std::vector<double> OHVarfinDer2Model::evaluateEqContentsTumor(
+std::vector<double> OHVarfinDerModel::evaluateEqContentsTumor(
                                                 int readsNum, const std::vector<double> &allLiksInLine, const std::vector<int> &allIndicatorInLine,
                                                 const std::vector<double> &digPIF,  const std::vector<double> &digPIH,
                                                 const std::vector<double> &digEPSL, const std::vector<double> &digEPSH, const std::vector<double> &digEPSB ){
@@ -88,7 +88,7 @@ std::vector<double> OHVarfinDer2Model::evaluateEqContentsTumor(
     return EqContents;
 }
 
-std::vector<double> OHVarfinDer2Model::evaluateEqContentsError(
+std::vector<double> OHVarfinDerModel::evaluateEqContentsError(
                                                 int readsNum, const std::vector<double> &allLiksInLine, const std::vector<int> &allIndicatorInLine,
                                                 const std::vector<double> &digEPSS, const std::vector<double> &digPIEH,
                                                 const std::vector<double> &digEPSL, const std::vector<double> &digEPSH, const std::vector<double> &digEPSB){
@@ -129,7 +129,7 @@ std::vector<double> OHVarfinDer2Model::evaluateEqContentsError(
 
 
 
-OHVarfinDer2Model::Result OHVarfinDer2Model::calcTrueLowerBounds(const std::vector<std::vector<double> > &allLiksT,
+OHVarfinDerModel::Result OHVarfinDerModel::calcTrueLowerBounds(const std::vector<std::vector<double> > &allLiksT,
                                                const std::vector<std::vector<double> > &allLiksN,
                                                const std::vector<std::vector<int> > &allIndicatorT,
                                                const std::vector<std::vector<int> > &allIndicatorN,
@@ -153,7 +153,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcTrueLowerBounds(const std::vect
         else if(!isExome){  alphaB = prior_alphaB = prior.mut_h0;}
     }
 
-    LOG(logINFO) << "=== OHVarfinDer2Model::calcTumorLowerBounds Both Parameters ===" << std::endl;
+    LOG(logINFO) << "=== OHVarfinDerModel::calcTumorLowerBounds Both Parameters ===" << std::endl;
     for(int i = 0 ; i < prior_gammaF.size();i++){LOG(logINFO) << "prior_gammaF [" << i  << "] :" << prior_gammaF[i] << std::endl;}
     for(int i = 0 ; i < prior_gammaH.size();i++){LOG(logINFO) << "prior_gammaH [" << i  << "] :" << prior_gammaH[i] << std::endl;}
     for(int i = 0 ; i < prior_alphaL.size();i++){LOG(logINFO) << "prior_alphaL [" << i  << "] :" << prior_alphaL[i] << std::endl;}
@@ -368,7 +368,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcTrueLowerBounds(const std::vect
         ans.st = SUCCESS;
     }
 
-    LOG(logINFO) << "=== OHVarfinDer2Model::calcTumorLowerBounds Both Parameters Posterior ===" << std::endl;
+    LOG(logINFO) << "=== OHVarfinDerModel::calcTumorLowerBounds Both Parameters Posterior ===" << std::endl;
     for(int i = 0 ; i < gammaF.size();i++){LOG(logINFO) << "gammaF [" << i  << "] :" << gammaF[i] << std::endl;}
     for(int i = 0 ; i < gammaH.size();i++){LOG(logINFO) << "gammaH [" << i  << "] :" << gammaH[i] << std::endl;}
     for(int i = 0 ; i < alphaL.size();i++){LOG(logINFO) << "alphaL [" << i  << "] :" << alphaL[i] << std::endl;}
@@ -383,7 +383,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcTrueLowerBounds(const std::vect
 
 
 
-OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vector<std::vector<double> > &allLiksT,
+OHVarfinDerModel::Result OHVarfinDerModel::calcErrorLowerBounds(const std::vector<std::vector<double> > &allLiksT,
                                                const std::vector<std::vector<double> > &allLiksN,
                                                const std::vector<std::vector<int> > &allIndicatorT,
                                                const std::vector<std::vector<int> > &allIndicatorN,
@@ -410,7 +410,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vec
         }
     }
 
-    LOG(logINFO) << "=== OHVarfinDer2Model::calcErrorLowerBounds Both Parameters ===" << std::endl;
+    LOG(logINFO) << "=== OHVarfinDerModel::calcErrorLowerBounds Both Parameters ===" << std::endl;
     for(int i = 0 ; i < prior_alphaL.size();i++){LOG(logINFO) << "prior_alphaL [" << i  << "] :" << prior_alphaL[i] << std::endl;}
     for(int i = 0 ; i < prior_alphaH.size();i++){LOG(logINFO) << "prior_alphaH [" << i  << "] :" << prior_alphaH[i] << std::endl;}
     for(int i = 0 ; i < prior_gammaEH.size();i++){LOG(logINFO) << "prior_gammaEH [" << i  << "] :" << prior_gammaEH[i] << std::endl;}
@@ -560,7 +560,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vec
         if(update > updateCount) break;
     }
 
-    LOG(logINFO) << "=== OHVarfinDer2Model::calcErrorLowerBounds Both PosteriorParameters ===" << std::endl;
+    LOG(logINFO) << "=== OHVarfinDerModel::calcErrorLowerBounds Both PosteriorParameters ===" << std::endl;
     for(int i = 0 ; i < alphaL.size();i++){LOG(logINFO) << "alphaL [" << i  << "] :" << alphaL[i] << std::endl;}
     for(int i = 0 ; i < alphaH.size();i++){LOG(logINFO) << "alphaH [" << i  << "] :" << alphaH[i] << std::endl;}
     for(int i = 0 ; i < gammaEH.size();i++){LOG(logINFO) << "gammaEH [" << i  << "] :" << gammaEH[i] << std::endl;}
@@ -582,7 +582,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vec
 }
 
 
-OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vector<std::vector<double> > &allLiks,
+OHVarfinDerModel::Result OHVarfinDerModel::calcErrorLowerBounds(const std::vector<std::vector<double> > &allLiks,
                                               const std::vector<std::vector<int> > &allIndicator,
                                               const Parameters::BayesEMParameters &prior, bool isExome){
     std::vector<double > alphaL;    std::vector<double > prior_alphaL;
@@ -607,7 +607,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vec
     }
 
     LOG(logINFO) <<  "alphaB.size() : " << alphaB.size() << std::endl;
-    LOG(logINFO) << "=== OHVarfinDer2Model::calcErrorLowerBounds Parameters ===" << std::endl;
+    LOG(logINFO) << "=== OHVarfinDerModel::calcErrorLowerBounds Parameters ===" << std::endl;
     if(isExome) LOG(logINFO) << "Exome Error Model" << std::endl;
     else if(!isExome) LOG(logINFO) << "Whole Error Model" << std::endl;
 
@@ -751,7 +751,7 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::calcErrorLowerBounds(const std::vec
     return ans;
 }
 
-OHVarfinDer2Model::Result OHVarfinDer2Model::estimate(){
+OHVarfinDerModel::Result OHVarfinDerModel::estimate(){
 	Result ans;
     Parameters::BayesEMParameters priorError = prior;
     Parameters::BayesEMParameters priorTumor = prior;
@@ -774,13 +774,13 @@ OHVarfinDer2Model::Result OHVarfinDer2Model::estimate(){
     return ans;
 }
 
-OHVarfinDer2Model::State OHVarfinDer2Model::getState2(Result r1, Result r2){
+OHVarfinDerModel::State OHVarfinDerModel::getState2(Result r1, Result r2){
     if(     r1.st != SUCCESS){ return r1.st; }
     else if(r2.st != SUCCESS){ return r2.st; }
 
     return SUCCESS;
 }
-OHVarfinDer2Model::State OHVarfinDer2Model::getState3(Result r1, Result r2, Result r3){
+OHVarfinDerModel::State OHVarfinDerModel::getState3(Result r1, Result r2, Result r3){
     State tmp;
     if((tmp = getState2(r1,r2)) != SUCCESS){ return tmp;  }
     else if(r3.st != SUCCESS){               return r3.st;}
@@ -788,7 +788,7 @@ OHVarfinDer2Model::State OHVarfinDer2Model::getState3(Result r1, Result r2, Resu
     return SUCCESS;
 }
 
-void OHVarfinDer2Model::initEZ(std::vector<double> &EZ, const std::vector<int> &allIndicatorInLine, int readsNum){
+void OHVarfinDerModel::initEZ(std::vector<double> &EZ, const std::vector<int> &allIndicatorInLine, int readsNum){
     for(int i = 0; i < readsNum; i++){
         if(allIndicatorInLine[at(i,0)] != 0){
             EZ[at(i,0)]  = 1.0;
@@ -805,18 +805,18 @@ void OHVarfinDer2Model::initEZ(std::vector<double> &EZ, const std::vector<int> &
 }
 
 template <typename T>
-void OHVarfinDer2Model::make2DArrayInLine(std::vector<T> &ans, const std::vector< std::vector<T> > &from, int colSize, int rowSize){
+void OHVarfinDerModel::make2DArrayInLine(std::vector<T> &ans, const std::vector< std::vector<T> > &from, int colSize, int rowSize){
     if(ans.size() != colSize*rowSize){ ans = std::vector<T>(colSize*rowSize);}
 
     for(int i = 0; i < colSize; i++)for(int j = 0 ; j < rowSize ; j++){ans[at(i,j)] = from[i][j];}
 }
 
 
-std::vector<double> OHVarfinDer2Model::logSumExpAs2DArray(const std::vector<double> &Eq, const std::vector<int> &mask, int colSize, int rowSize){
+std::vector<double> OHVarfinDerModel::logSumExpAs2DArray(const std::vector<double> &Eq, const std::vector<int> &mask, int colSize, int rowSize){
     std::vector< double > ans(colSize * rowSize, 0.0);
     if(Eq.size() != colSize*rowSize) {
-        LOG(logINFO) << "Eq.size() != colSize*rowSize @ OHVarfinDer2Model::logSumExpAs2DArray" << std::endl;
-        throw std::string("Eq.size() != colSize*rowSize @ OHVarfinDer2Model::logSumExpAs2DArray");
+        LOG(logINFO) << "Eq.size() != colSize*rowSize @ OHVarfinDerModel::logSumExpAs2DArray" << std::endl;
+        throw std::string("Eq.size() != colSize*rowSize @ OHVarfinDerModel::logSumExpAs2DArray");
         return ans;
     }
     for(int i = 0; i < colSize; i++){
@@ -836,13 +836,13 @@ std::vector<double> OHVarfinDer2Model::logSumExpAs2DArray(const std::vector<doub
     return ans;
 }
 
-void OHVarfinDer2Model::logSumExpAs2DArray(std::vector<double>& ans, const std::vector<double> &Eq, const std::vector<int> &mask, int colSize, int rowSize){
+void OHVarfinDerModel::logSumExpAs2DArray(std::vector<double>& ans, const std::vector<double> &Eq, const std::vector<int> &mask, int colSize, int rowSize){
     if(ans.size() != colSize * rowSize){
         ans = std::vector< double >(colSize * rowSize, 0.0);
     }
     if(Eq.size() != colSize*rowSize) {
-        LOG(logINFO) << "Eq.size() != colSize*rowSize @ OHVarfinDer2Model::logSumExpAs2DArray" << std::endl;
-        throw std::string("Eq.size() != colSize*rowSize @ OHVarfinDer2Model::logSumExpAs2DArray");
+        LOG(logINFO) << "Eq.size() != colSize*rowSize @ OHVarfinDerModel::logSumExpAs2DArray" << std::endl;
+        throw std::string("Eq.size() != colSize*rowSize @ OHVarfinDerModel::logSumExpAs2DArray");
     }
     for(int i = 0; i < colSize; i++){
         double sum   = 0.0;

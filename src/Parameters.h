@@ -146,8 +146,8 @@ public:
     };
     PileUpParameters pileN, pileT, pileHetero, pileTriAllele;
     
-    // typedef enum { OVAR,OVARFINDER,OHVARFINDER,OHVARFINDER2,HAPMUC,HETEROSNPCALL } ALGO;
-    typedef enum { OHVARFINDER2,HAPMUC,HETEROSNPCALL,READPROBCOUNTER,OHVARFINDER2NOCATEGORY } ALGO;
+    // typedef enum { OVAR,OVARFINDER,OHVARFINDER,OHVARFINDER,HAPMUC,HETEROSNPCALL } ALGO;
+    typedef enum { OHVARFINDER,HAPMUC,HETEROSNPCALL} ALGO;
     ALGO method;
 
     Parameters(int argc, const char *argv[]);
@@ -178,7 +178,7 @@ public:
     int fReadFilter;
     int FReadFilter;
     
-    // === parameters only for OHVarfinDer2 method ===
+    // === parameters only for OHVarfinDer method ===
     BayesEMParameters OHVarfinDParams2;
     
     // === parameters only for HapMuc method ===
@@ -187,8 +187,8 @@ public:
     // === parameters only for OHVarfinDParams2NoCategory method ===
     BayesEMParameters OHVarfinDParams2NoCategory;
 private:
-    void getFromCommandLineArgumentsInOHVarfinDer2(           cmdline::parser& a,int argc, const char *argv[]);
+    void getFromCommandLineArgumentsInOHVarfinDer(           cmdline::parser& a,int argc, const char *argv[]);
     void getFromCommandLineArgumentsInHapMuC(                 cmdline::parser& a,int argc, const char *argv[]);
-    void getFromCommandLineArgumentsInOHVarfinDer2NoCategory( cmdline::parser& a,int argc, const char *argv[]);
+    void getFromCommandLineArgumentsInOHVarfinDerNoCategory( cmdline::parser& a,int argc, const char *argv[]);
 };
 #endif

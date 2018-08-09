@@ -22,25 +22,25 @@ heteroSNPMinAvgBaseQuality=25
 # isSingle=--singleReads
 isSingle=
 
-ohvar2_mutGammaF=5.0,1.0
-ohvar2_mutGammaH=2.5,2.5,1.0
-ohvar2_mutAlphaL=0.1,10.0
-ohvar2_mutAlphaH=0.1,10.0
-ohvar2_mutGammaEH=1.0,1.0
-ohvar2_mutAlphaS=0.1,10.0
+ohvar_mutGammaF=5.0,1.0
+ohvar_mutGammaH=2.5,2.5,1.0
+ohvar_mutAlphaL=0.1,10.0
+ohvar_mutAlphaH=0.1,10.0
+ohvar_mutGammaEH=1.0,1.0
+ohvar_mutAlphaS=0.1,10.0
 
-ohvar2_mutAlphaB_E=10.0,10.0
-ohvar2_mutAlphaB_W=1.0,1.0
+ohvar_mutAlphaB_E=10.0,10.0
+ohvar_mutAlphaB_W=1.0,1.0
 
-ohvar2_errAlphaL_E=1.0,10.0
-ohvar2_errAlphaH_E=1.0,10.0
-ohvar2_errGammaEH_E=1.0,1.0
-ohvar2_errAlphaS_E=1.0,10.0
-ohvar2_errAlphaB_E=0.05,0.05
+ohvar_errAlphaL_E=1.0,10.0
+ohvar_errAlphaH_E=1.0,10.0
+ohvar_errGammaEH_E=1.0,1.0
+ohvar_errAlphaS_E=1.0,10.0
+ohvar_errAlphaB_E=0.05,0.05
 
-ohvar2_errAlphaL_W=1.0,10.0
-ohvar2_errAlphaH_W=1.0,10.0
-ohvar2_errGammaEH_W=1.0,1.0
-ohvar2_errAlphaS_W=1.0,10.0
-ohvar2_errAlphaB_W=0.5,0.5
+ohvar_errAlphaL_W=1.0,10.0
+ohvar_errAlphaH_W=1.0,10.0
+ohvar_errGammaEH_W=1.0,1.0
+ohvar_errAlphaS_W=1.0,10.0
+ohvar_errAlphaB_W=0.5,0.5
 

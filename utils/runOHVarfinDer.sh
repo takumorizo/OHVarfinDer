@@ -57,7 +57,7 @@ echo "check_mkdir ${OUTPUTDIR}"
 check_mkdir ${OUTPUTDIR}
 
 echo "${DIR}/../bin/ohvarfinder \
---algorithm OHVarfinDer2 \
+--algorithm OHVarfinDer \
 -f ${REF}    \
 -a ${TUMOR}  \
 -b ${NORMAL} \
@@ -73,24 +73,24 @@ echo "${DIR}/../bin/ohvarfinder \
 --heteroSNPMinDepth=${heteroSNPMinDepth} \
 --heteroSNPMinObsRate=${heteroSNPMinObsRate} \
 --heteroSNPMinObsNum=${heteroSNPMinObsNum} \
---ohvar2_mutGammaF=${ohvar2_mutGammaF} \
---ohvar2_mutGammaH=${ohvar2_mutGammaH} \
---ohvar2_mutAlphaL=${ohvar2_mutAlphaL} \
---ohvar2_mutAlphaH=${ohvar2_mutAlphaH} \
---ohvar2_mutGammaEH=${ohvar2_mutGammaEH} \
---ohvar2_mutAlphaS=${ohvar2_mutAlphaS} \
---ohvar2_mutAlphaB_E=${ohvar2_mutAlphaB_E} \
---ohvar2_mutAlphaB_W=${ohvar2_mutAlphaB_W} \
---ohvar2_errAlphaL_E=${ohvar2_errAlphaL_E} \
---ohvar2_errAlphaH_E=${ohvar2_errAlphaH_E} \
---ohvar2_errGammaEH_E=${ohvar2_errGammaEH_E} \
---ohvar2_errAlphaS_E=${ohvar2_errAlphaS_E} \
---ohvar2_errAlphaB_E=${ohvar2_errAlphaB_E} \
---ohvar2_errAlphaL_W=${ohvar2_errAlphaL_W} \
---ohvar2_errAlphaH_W=${ohvar2_errAlphaH_W} \
---ohvar2_errGammaEH_W=${ohvar2_errGammaEH_W} \
---ohvar2_errAlphaS_W=${ohvar2_errAlphaS_W} \
---ohvar2_errAlphaB_W=${ohvar2_errAlphaB_W} \
+--ohvar_mutGammaF=${ohvar_mutGammaF} \
+--ohvar_mutGammaH=${ohvar_mutGammaH} \
+--ohvar_mutAlphaL=${ohvar_mutAlphaL} \
+--ohvar_mutAlphaH=${ohvar_mutAlphaH} \
+--ohvar_mutGammaEH=${ohvar_mutGammaEH} \
+--ohvar_mutAlphaS=${ohvar_mutAlphaS} \
+--ohvar_mutAlphaB_E=${ohvar_mutAlphaB_E} \
+--ohvar_mutAlphaB_W=${ohvar_mutAlphaB_W} \
+--ohvar_errAlphaL_E=${ohvar_errAlphaL_E} \
+--ohvar_errAlphaH_E=${ohvar_errAlphaH_E} \
+--ohvar_errGammaEH_E=${ohvar_errGammaEH_E} \
+--ohvar_errAlphaS_E=${ohvar_errAlphaS_E} \
+--ohvar_errAlphaB_E=${ohvar_errAlphaB_E} \
+--ohvar_errAlphaL_W=${ohvar_errAlphaL_W} \
+--ohvar_errAlphaH_W=${ohvar_errAlphaH_W} \
+--ohvar_errGammaEH_W=${ohvar_errGammaEH_W} \
+--ohvar_errAlphaS_W=${ohvar_errAlphaS_W} \
+--ohvar_errAlphaB_W=${ohvar_errAlphaB_W} \
 --tumorMinAvgBaseQuality=${tumorMinAvgBaseQuality} \
 --normalMinAvgBaseQuality=${normalMinAvgBaseQuality} \
 --heteroSNPMinAvgBaseQuality=${heteroSNPMinAvgBaseQuality} \
@@ -100,7 +100,7 @@ echo "${DIR}/../bin/ohvarfinder \
 ${isSingle} \
 -R ${REGION}"
 ${DIR}/../bin/ohvarfinder \
---algorithm OHVarfinDer2 \
+--algorithm OHVarfinDer \
 -f ${REF}    \
 -a ${TUMOR}  \
 -b ${NORMAL} \
@@ -116,24 +116,24 @@ ${DIR}/../bin/ohvarfinder \
 --heteroSNPMinDepth=${heteroSNPMinDepth} \
 --heteroSNPMinObsRate=${heteroSNPMinObsRate} \
 --heteroSNPMinObsNum=${heteroSNPMinObsNum} \
---ohvar2_mutGammaF=${ohvar2_mutGammaF} \
---ohvar2_mutGammaH=${ohvar2_mutGammaH} \
---ohvar2_mutAlphaL=${ohvar2_mutAlphaL} \
---ohvar2_mutAlphaH=${ohvar2_mutAlphaH} \
---ohvar2_mutGammaEH=${ohvar2_mutGammaEH} \
---ohvar2_mutAlphaS=${ohvar2_mutAlphaS} \
---ohvar2_mutAlphaB_E=${ohvar2_mutAlphaB_E} \
---ohvar2_mutAlphaB_W=${ohvar2_mutAlphaB_W} \
---ohvar2_errAlphaL_E=${ohvar2_errAlphaL_E} \
---ohvar2_errAlphaH_E=${ohvar2_errAlphaH_E} \
---ohvar2_errGammaEH_E=${ohvar2_errGammaEH_E} \
---ohvar2_errAlphaS_E=${ohvar2_errAlphaS_E} \
---ohvar2_errAlphaB_E=${ohvar2_errAlphaB_E} \
---ohvar2_errAlphaL_W=${ohvar2_errAlphaL_W} \
---ohvar2_errAlphaH_W=${ohvar2_errAlphaH_W} \
---ohvar2_errGammaEH_W=${ohvar2_errGammaEH_W} \
---ohvar2_errAlphaS_W=${ohvar2_errAlphaS_W} \
---ohvar2_errAlphaB_W=${ohvar2_errAlphaB_W} \
+--ohvar_mutGammaF=${ohvar_mutGammaF} \
+--ohvar_mutGammaH=${ohvar_mutGammaH} \
+--ohvar_mutAlphaL=${ohvar_mutAlphaL} \
+--ohvar_mutAlphaH=${ohvar_mutAlphaH} \
+--ohvar_mutGammaEH=${ohvar_mutGammaEH} \
+--ohvar_mutAlphaS=${ohvar_mutAlphaS} \
+--ohvar_mutAlphaB_E=${ohvar_mutAlphaB_E} \
+--ohvar_mutAlphaB_W=${ohvar_mutAlphaB_W} \
+--ohvar_errAlphaL_E=${ohvar_errAlphaL_E} \
+--ohvar_errAlphaH_E=${ohvar_errAlphaH_E} \
+--ohvar_errGammaEH_E=${ohvar_errGammaEH_E} \
+--ohvar_errAlphaS_E=${ohvar_errAlphaS_E} \
+--ohvar_errAlphaB_E=${ohvar_errAlphaB_E} \
+--ohvar_errAlphaL_W=${ohvar_errAlphaL_W} \
+--ohvar_errAlphaH_W=${ohvar_errAlphaH_W} \
+--ohvar_errGammaEH_W=${ohvar_errGammaEH_W} \
+--ohvar_errAlphaS_W=${ohvar_errAlphaS_W} \
+--ohvar_errAlphaB_W=${ohvar_errAlphaB_W} \
 --tumorMinAvgBaseQuality=${tumorMinAvgBaseQuality} \
 --normalMinAvgBaseQuality=${normalMinAvgBaseQuality} \
 --heteroSNPMinAvgBaseQuality=${heteroSNPMinAvgBaseQuality} \

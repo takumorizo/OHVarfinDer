@@ -1,13 +1,13 @@
 //
-//  OHVarfinDer2.hpp
+//  OHVarfinDer.hpp
 //  OHVarFinder
 //
 //  Created by 森山卓也 on 2016/07/06.
 //  Copyright © 2016年 森山卓也. All rights reserved.
 //
 
-#ifndef OHVarfinDer2_hpp
-#define OHVarfinDer2_hpp
+#ifndef OHVarfinDer_hpp
+#define OHVarfinDer_hpp
 
 #include <stdio.h>
 #include <vector>
@@ -26,14 +26,14 @@
 #include <string>
 
 
-class OHVarfinDer2 : public BaseMutationCaller{
+class OHVarfinDer : public BaseMutationCaller{
 public:
     HaplotypeBuilder hapBuilder;
     BamReader &tumorBamReader;
     BamReader &normalBamReader;
     const Parameters params;
     const faidx_t *fai;
-    OHVarfinDer2(BamReader &tumorBamReader, BamReader &normalBamReader, Parameters params, const faidx_t *fai);
+    OHVarfinDer(BamReader &tumorBamReader, BamReader &normalBamReader, Parameters params, const faidx_t *fai);
     virtual MutationCallResult call(const CandidateWindow &candidateWindow);
 
     // TODO : rewrite to the normal private function
@@ -196,4 +196,4 @@ private:
 
     static double getFactorFromLnToLog10();
 };
-#endif /* OHVarfinDer2_hpp */
+#endif /* OHVarfinDer_hpp */

@@ -69,7 +69,7 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     
     a.add("withoutBayesFactor", '\0', "Do not calculate Bayes factor, only shows candidate mutations ");
     
-    a.add<std::string>("algorithm", '\0', " algorithm type used in mutation Call, choose one of them : OHVarfinDer2, HapMuC ", false, "OHVarfinDer2");
+    a.add<std::string>("algorithm", '\0', " algorithm type used in mutation Call, choose one of them : OHVarfinDer, HapMuC ", false, "OHVarfinDer");
     a.add<double>("heteroSNPConfidenceInterval", '\0', " check, (ref,obs) is within the ${heteroSNPConfidenceInterval} confidence interval of binom(ref+obs,obs,0.5)", false,0.99);
     a.add<int>("pileUpBufferSize", '\0', "pileUp Parse BufferSize", false, 4000000);
     
@@ -114,26 +114,26 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     a.add<std::string>("hapmuc_errorModelGamma", '\0', "hyper parameter for normal haplotype frequencies in error model.", false, "1.0,1.0");
 
     
-    a.add<std::string>("ohvar2_mutGammaF", '\0', "ohvar2_mutGammaF", false, "10.0,1.0");
-    a.add<std::string>("ohvar2_mutGammaH", '\0', "ohvar2_mutGammaH", false, "5.0,5.0,1.0");
-    a.add<std::string>("ohvar2_mutAlphaL", '\0', "ohvar2_mutAlphaL", false, "1.0,100.0");
-    a.add<std::string>("ohvar2_mutAlphaH", '\0', "ohvar2_mutAlphaH", false, "1.0,100.0");
-    a.add<std::string>("ohvar2_mutGammaEH", '\0', "ohvar2_mutGammaEH",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_mutAlphaS",  '\0', "ohvar2_mutAlphaS", false, "1.0,100.0");
-    a.add<std::string>("ohvar2_mutAlphaB_E", '\0', "ohvar2_mutAlphaB_E", false, "50.0,50.0");
-    a.add<std::string>("ohvar2_mutAlphaB_W", '\0', "ohvar2_mutAlphaB_W", false, "5.0,5.0");
+    a.add<std::string>("ohvar_mutGammaF", '\0', "ohvar_mutGammaF", false, "10.0,1.0");
+    a.add<std::string>("ohvar_mutGammaH", '\0', "ohvar_mutGammaH", false, "5.0,5.0,1.0");
+    a.add<std::string>("ohvar_mutAlphaL", '\0', "ohvar_mutAlphaL", false, "1.0,100.0");
+    a.add<std::string>("ohvar_mutAlphaH", '\0', "ohvar_mutAlphaH", false, "1.0,100.0");
+    a.add<std::string>("ohvar_mutGammaEH", '\0', "ohvar_mutGammaEH",false, "5.0,5.0");
+    a.add<std::string>("ohvar_mutAlphaS",  '\0', "ohvar_mutAlphaS", false, "1.0,100.0");
+    a.add<std::string>("ohvar_mutAlphaB_E", '\0', "ohvar_mutAlphaB_E", false, "50.0,50.0");
+    a.add<std::string>("ohvar_mutAlphaB_W", '\0', "ohvar_mutAlphaB_W", false, "5.0,5.0");
     
-    a.add<std::string>("ohvar2_errAlphaL_E",  '\0', "ohvar2_errAlphaL_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errAlphaH_E",  '\0', "ohvar2_errAlphaH_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errGammaEH_E", '\0', "ohvar2_errGammaEH_E",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_errAlphaS_E",  '\0', "ohvar2_errAlphaS_E", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errAlphaB_E",  '\0', "ohvar2_errAlphaB_E", false, "0.05,0.05");
+    a.add<std::string>("ohvar_errAlphaL_E",  '\0', "ohvar_errAlphaL_E", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errAlphaH_E",  '\0', "ohvar_errAlphaH_E", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errGammaEH_E", '\0', "ohvar_errGammaEH_E",false, "5.0,5.0");
+    a.add<std::string>("ohvar_errAlphaS_E",  '\0', "ohvar_errAlphaS_E", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errAlphaB_E",  '\0', "ohvar_errAlphaB_E", false, "0.05,0.05");
 
-    a.add<std::string>("ohvar2_errAlphaL_W",  '\0', "ohvar2_errAlphaL_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errAlphaH_W",  '\0', "ohvar2_errAlphaH_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errGammaEH_W", '\0', "ohvar2_errGammaEH_W",false, "5.0,5.0");
-    a.add<std::string>("ohvar2_errAlphaS_W",  '\0', "ohvar2_errAlphaS_W", false, "2.0,30.0");
-    a.add<std::string>("ohvar2_errAlphaB_W",  '\0', "ohvar2_errAlphaB_W", false, "0.5,0.5");
+    a.add<std::string>("ohvar_errAlphaL_W",  '\0', "ohvar_errAlphaL_W", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errAlphaH_W",  '\0', "ohvar_errAlphaH_W", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errGammaEH_W", '\0', "ohvar_errGammaEH_W",false, "5.0,5.0");
+    a.add<std::string>("ohvar_errAlphaS_W",  '\0', "ohvar_errAlphaS_W", false, "2.0,30.0");
+    a.add<std::string>("ohvar_errAlphaB_W",  '\0', "ohvar_errAlphaB_W", false, "0.5,0.5");
     
     a.parse_check(argc, argv);
     
@@ -216,14 +216,13 @@ void Parameters::getFromCommandLineArguments(int argc, const char *argv[]) {
     pileTriAllele.maxObsNum  = 1000000;
     
     std::string algorithmType = a.get<std::string>("algorithm");
-    if(     algorithmType == "OHVarfinDer2")           method = Parameters::OHVARFINDER2;
+    if(     algorithmType == "OHVarfinDer")            method = Parameters::OHVARFINDER;
     else if(algorithmType == "HapMuC")                 method = Parameters::HAPMUC;
     else if(algorithmType == "HeteroSNPCall")          method = Parameters::HETEROSNPCALL;
     else                                               throw std::string(" unknown Algorithm type specified ");
     
-    if(method == Parameters::OHVARFINDER2)                getFromCommandLineArgumentsInOHVarfinDer2(a,argc,argv);
+    if(method == Parameters::OHVARFINDER)                 getFromCommandLineArgumentsInOHVarfinDer(a,argc,argv);
     else if(method == Parameters::Parameters::HAPMUC)     getFromCommandLineArgumentsInHapMuC(a,argc,argv);
-    else if(method == Parameters::OHVARFINDER2NOCATEGORY) getFromCommandLineArgumentsInOHVarfinDer2NoCategory(a,argc,argv);
 }
 
 
@@ -237,27 +236,27 @@ void Parameters::getFromCommandLineArgumentsInHapMuC(cmdline::parser& a, int arg
     hap2_params = hap3_params;
 }
 
-void Parameters::getFromCommandLineArgumentsInOHVarfinDer2(cmdline::parser& a, int argc, const char *argv[]){
+void Parameters::getFromCommandLineArgumentsInOHVarfinDer(cmdline::parser& a, int argc, const char *argv[]){
     OHVarfinDParams2.clear_all();
-    parseHyperParameters(OHVarfinDParams2.mut_a0, a.get<std::string>("ohvar2_mutGammaF"));
-    parseHyperParameters(OHVarfinDParams2.mut_b0, a.get<std::string>("ohvar2_mutGammaH"));
-    parseHyperParameters(OHVarfinDParams2.mut_c0, a.get<std::string>("ohvar2_mutAlphaL"));
-    parseHyperParameters(OHVarfinDParams2.mut_d0, a.get<std::string>("ohvar2_mutAlphaH"));
-    parseHyperParameters(OHVarfinDParams2.mut_e0, a.get<std::string>("ohvar2_mutGammaEH"));
-    parseHyperParameters(OHVarfinDParams2.mut_f0, a.get<std::string>("ohvar2_mutAlphaS"));
-    parseHyperParameters(OHVarfinDParams2.mut_g0, a.get<std::string>("ohvar2_mutAlphaB_E"));
-    parseHyperParameters(OHVarfinDParams2.mut_h0, a.get<std::string>("ohvar2_mutAlphaB_W"));
+    parseHyperParameters(OHVarfinDParams2.mut_a0, a.get<std::string>("ohvar_mutGammaF"));
+    parseHyperParameters(OHVarfinDParams2.mut_b0, a.get<std::string>("ohvar_mutGammaH"));
+    parseHyperParameters(OHVarfinDParams2.mut_c0, a.get<std::string>("ohvar_mutAlphaL"));
+    parseHyperParameters(OHVarfinDParams2.mut_d0, a.get<std::string>("ohvar_mutAlphaH"));
+    parseHyperParameters(OHVarfinDParams2.mut_e0, a.get<std::string>("ohvar_mutGammaEH"));
+    parseHyperParameters(OHVarfinDParams2.mut_f0, a.get<std::string>("ohvar_mutAlphaS"));
+    parseHyperParameters(OHVarfinDParams2.mut_g0, a.get<std::string>("ohvar_mutAlphaB_E"));
+    parseHyperParameters(OHVarfinDParams2.mut_h0, a.get<std::string>("ohvar_mutAlphaB_W"));
 
     
-    parseHyperParameters(OHVarfinDParams2.err_a0, a.get<std::string>("ohvar2_errAlphaL_E"));
-    parseHyperParameters(OHVarfinDParams2.err_b0, a.get<std::string>("ohvar2_errAlphaH_E"));
-    parseHyperParameters(OHVarfinDParams2.err_c0, a.get<std::string>("ohvar2_errGammaEH_E"));
-    parseHyperParameters(OHVarfinDParams2.err_d0, a.get<std::string>("ohvar2_errAlphaS_E"));
-    parseHyperParameters(OHVarfinDParams2.err_e0, a.get<std::string>("ohvar2_errAlphaB_E"));
+    parseHyperParameters(OHVarfinDParams2.err_a0, a.get<std::string>("ohvar_errAlphaL_E"));
+    parseHyperParameters(OHVarfinDParams2.err_b0, a.get<std::string>("ohvar_errAlphaH_E"));
+    parseHyperParameters(OHVarfinDParams2.err_c0, a.get<std::string>("ohvar_errGammaEH_E"));
+    parseHyperParameters(OHVarfinDParams2.err_d0, a.get<std::string>("ohvar_errAlphaS_E"));
+    parseHyperParameters(OHVarfinDParams2.err_e0, a.get<std::string>("ohvar_errAlphaB_E"));
 
-    parseHyperParameters(OHVarfinDParams2.err_f0, a.get<std::string>("ohvar2_errAlphaL_W"));
-    parseHyperParameters(OHVarfinDParams2.err_g0, a.get<std::string>("ohvar2_errAlphaH_W"));
-    parseHyperParameters(OHVarfinDParams2.err_h0, a.get<std::string>("ohvar2_errGammaEH_W"));
-    parseHyperParameters(OHVarfinDParams2.err_i0, a.get<std::string>("ohvar2_errAlphaS_W"));
-    parseHyperParameters(OHVarfinDParams2.err_j0, a.get<std::string>("ohvar2_errAlphaB_W"));
+    parseHyperParameters(OHVarfinDParams2.err_f0, a.get<std::string>("ohvar_errAlphaL_W"));
+    parseHyperParameters(OHVarfinDParams2.err_g0, a.get<std::string>("ohvar_errAlphaH_W"));
+    parseHyperParameters(OHVarfinDParams2.err_h0, a.get<std::string>("ohvar_errGammaEH_W"));
+    parseHyperParameters(OHVarfinDParams2.err_i0, a.get<std::string>("ohvar_errAlphaS_W"));
+    parseHyperParameters(OHVarfinDParams2.err_j0, a.get<std::string>("ohvar_errAlphaB_W"));
 }

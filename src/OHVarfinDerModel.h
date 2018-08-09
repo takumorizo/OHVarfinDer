@@ -24,7 +24,7 @@
 #include "Haplotype.hpp"
 
 // TODO : remove comments
-class OHVarfinDer2Model  {
+class OHVarfinDerModel  {
 public:
     const Parameters::BayesEMParameters &prior;
     const std::vector<std::vector<double> > &tumorLiks, &normalLiks;
@@ -40,7 +40,7 @@ public:
         State  st;
         double value;
     };
-    OHVarfinDer2Model(const std::vector<std::vector<double> > &tumorLiks, const std::vector<std::vector<double> > &normalLiks,
+    OHVarfinDerModel(const std::vector<std::vector<double> > &tumorLiks, const std::vector<std::vector<double> > &normalLiks,
                      const std::vector<std::vector<int> > &tumorIndicator, const std::vector<std::vector<int> > &normalIndicator,
                      const Parameters::BayesEMParameters &prior,
                     int updateCount = 500, double minLqConvergence = 0.0001, int thresModelChangeDepth = 100);  //est_type=mutation or non-mutation
@@ -88,8 +88,8 @@ private:
         return 22*x+y;
     }
 
-    OHVarfinDer2Model::State getState2(Result r1, Result r2);
-    OHVarfinDer2Model::State getState3(Result r1, Result r2, Result r3);
+    OHVarfinDerModel::State getState2(Result r1, Result r2);
+    OHVarfinDerModel::State getState3(Result r1, Result r2, Result r3);
 
     void initEZ(std::vector<double> &EZ, const std::vector<int> &allIndicatorInLine, int readsNum);
     template <typename T> void make2DArrayInLine(std::vector<T> &ans, const std::vector< std::vector<T> > &from, int colSize, int rowSize = 22);

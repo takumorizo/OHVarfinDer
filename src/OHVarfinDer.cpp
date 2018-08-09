@@ -1,12 +1,12 @@
 //
-//  OHVarfinDer2.cpp
+//  OHVarfinDer.cpp
 //  OHVarFinder
 //
 //  Created by 森山卓也 on 2016/07/06.
 //  Copyright © 2016年 森山卓也. All rights reserved.
 //
 
-#include "OHVarfinDer2.h"
+#include "OHVarfinDer.h"
 
 #include "faidx.h"
 #include "MutationCaller.h"
@@ -19,14 +19,14 @@
 #include "ProfileHMMUtils.h"
 #include "ReadUtils.h"
 #include "ReadsProfile.h"
-#include "OHVarfinDer2Model.h"
+#include "OHVarfinDerModel.h"
 
 
-OHVarfinDer2::OHVarfinDer2(BamReader &_tumorBamReader,
+OHVarfinDer::OHVarfinDer(BamReader &_tumorBamReader,
                          BamReader &_normalBamReader,
                          Parameters _params,
                          const faidx_t *_fai) : params(_params), tumorBamReader(_tumorBamReader),
-normalBamReader(_normalBamReader), hapBuilder(_fai), fai(_fai), fromLnToLog10Factor(OHVarfinDer2::getFactorFromLnToLog10()) {
+normalBamReader(_normalBamReader), hapBuilder(_fai), fai(_fai), fromLnToLog10Factor(OHVarfinDer::getFactorFromLnToLog10()) {
     hapBuilder.windowSize = 2 * (params.maxInsertSize + params.maxReadLength);
     //hapIndex;
     hapIndex.clear();
@@ -86,7 +86,7 @@ normalBamReader(_normalBamReader), hapBuilder(_fai), fai(_fai), fromLnToLog10Fac
 }
 
 
-MutationCallResult OHVarfinDer2::call(const CandidateWindow &window) {
+MutationCallResult OHVarfinDer::call(const CandidateWindow &window) {
     // prepare result
     MutationCallResult result(window);
     //
@@ -193,8 +193,8 @@ MutationCallResult OHVarfinDer2::call(const CandidateWindow &window) {
             std::vector<std::pair<Haplotype, Haplotype> > hapPairsBasic;
             buildHapPaires(hapPairs, hapPairsBasic, haps, haps_ref);
 
-            std::vector<std::vector<int> > tumorReadTypes  = OHVarfinDer2::setReadTypes(closeVariantsForFetchingReads, window.target, tumorReads);
-            std::vector<std::vector<int> > normalReadTypes = OHVarfinDer2::setReadTypes(closeVariantsForFetchingReads ,window.target, normalReads);
+            std::vector<std::vector<int> > tumorReadTypes  = OHVarfinDer::setReadTypes(closeVariantsForFetchingReads, window.target, tumorReads);
+            std::vector<std::vector<int> > normalReadTypes = OHVarfinDer::setReadTypes(closeVariantsForFetchingReads ,window.target, normalReads);
 
             //
             // calculate alignment likelihoods of reads against haplotypes for OHVarfinDer Model
@@ -229,27 +229,27 @@ MutationCallResult OHVarfinDer2::call(const CandidateWindow &window) {
                         swapSNP(tumorLiks); swapSNP(normalLiks);
                         HaplotypeBuilder::swapHaps(hapPairs, idx_h, idx_oh_all);
                     }
-                    OHVarfinDer2Model ohvarModel_withHeteroSNP = OHVarfinDer2Model(tumorLiks, normalLiks, tumorReadTypes, normalReadTypes, params.OHVarfinDParams2,500,0.00001);
-                    OHVarfinDer2Model::Result ans = ohvarModel_withHeteroSNP.estimate();
+                    OHVarfinDerModel ohvarModel_withHeteroSNP = OHVarfinDerModel(tumorLiks, normalLiks, tumorReadTypes, normalReadTypes, params.OHVarfinDParams2,500,0.00001);
+                    OHVarfinDerModel::Result ans = ohvarModel_withHeteroSNP.estimate();
                     LOG(logINFO) << "end check BF (with Hap) " << std::endl;
-                    if(ans.st == OHVarfinDer2Model::SUCCESS){
+                    if(ans.st == OHVarfinDerModel::SUCCESS){
                         double BF =  std::log10(getPriorRatio(window)) + ans.value * fromLnToLog10Factor;
                         result.setBayesFactor(BF);
                         result.usedCloseGermlineVariants1 = haps[0].variants;
                         result.usedCloseGermlineVariants2 = haps[1].variants;
-                    }else if(ans.st == OHVarfinDer2Model::UMBALANCED_NORMAL_HAPLOTYPE){
+                    }else if(ans.st == OHVarfinDerModel::UMBALANCED_NORMAL_HAPLOTYPE){
                         result.setStatus("umbalanced_normal_haplotypes");
                     }else{
                         throw std::string("something wrong during calculation of bayes factor");
                     }
                 }
-                tumorReadTypes  = OHVarfinDer2::setReadTypes(closeVariantsForFetchingReads, window.target, tumorReads,  true);
-                normalReadTypes = OHVarfinDer2::setReadTypes(closeVariantsForFetchingReads, window.target, normalReads, true);
+                tumorReadTypes  = OHVarfinDer::setReadTypes(closeVariantsForFetchingReads, window.target, tumorReads,  true);
+                normalReadTypes = OHVarfinDer::setReadTypes(closeVariantsForFetchingReads, window.target, normalReads, true);
                 tumorLiks  = ProfileHMMUtils::calcAllLikelihoods(hapPairsBasic, tumorReads,  tumorReadTypes,  hapIndex);
                 normalLiks = ProfileHMMUtils::calcAllLikelihoods(hapPairsBasic, normalReads, normalReadTypes, hapIndex);
 
-                OHVarfinDer2Model ohvarModel_withoutHeteroSNP = OHVarfinDer2Model(tumorLiks, normalLiks, tumorReadTypes, normalReadTypes, params.OHVarfinDParams2,500,0.00001);
-                OHVarfinDer2Model::Result ans = ohvarModel_withoutHeteroSNP.estimate();
+                OHVarfinDerModel ohvarModel_withoutHeteroSNP = OHVarfinDerModel(tumorLiks, normalLiks, tumorReadTypes, normalReadTypes, params.OHVarfinDParams2,500,0.00001);
+                OHVarfinDerModel::Result ans = ohvarModel_withoutHeteroSNP.estimate();
                 LOG(logINFO) << "end check BF (without Hap) " << std::endl;
                 double BF =  std::log10(getPriorRatio(window)) + ans.value * fromLnToLog10Factor;
                 result.setBayesFactorBasic(BF);
@@ -289,7 +289,7 @@ FINALLY:
     return result;
 }
 
-void OHVarfinDer2::setTNReads(std::string chr, int pos,
+void OHVarfinDer::setTNReads(std::string chr, int pos,
                         int maxInsertSize, const CandidateWindow &window, std::vector<Variant> &closeVariants,
                         std::vector<IRead *> &allTumorReads, std::vector<IRead *> &allNormalReads,
                         MutationCallResult& result){
@@ -341,7 +341,7 @@ void OHVarfinDer2::setTNReads(std::string chr, int pos,
     }
 }
 
-bool OHVarfinDer2::checkHaplotypeGoodState(const CandidateWindow &window, std::string chr,
+bool OHVarfinDer::checkHaplotypeGoodState(const CandidateWindow &window, std::string chr,
                              std::vector<IRead *>& tmpTumorReads, std::vector<IRead *>& tmpNormalReads,
                              Parameters params, MutationCallResult &result){
     try {
@@ -370,7 +370,7 @@ bool OHVarfinDer2::checkHaplotypeGoodState(const CandidateWindow &window, std::s
     return true;
 }
 
-bool OHVarfinDer2::checkHaplotypeBuildPossibilityAndBuildHaplotype(std::vector<Haplotype> &normalHaps, std::vector<Haplotype> &refHaps, MutationCallResult &result,
+bool OHVarfinDer::checkHaplotypeBuildPossibilityAndBuildHaplotype(std::vector<Haplotype> &normalHaps, std::vector<Haplotype> &refHaps, MutationCallResult &result,
                                                                    std::string chr,
                                                                    const std::vector<Variant>& closeVariantsForFetchingReads, const CandidateWindow &window,
                                                                    const std::vector<IRead *> &allTumorReads, const std::vector<IRead *> &allNormalReads){
@@ -394,7 +394,7 @@ bool OHVarfinDer2::checkHaplotypeBuildPossibilityAndBuildHaplotype(std::vector<H
     return true;
 }
 
-bool OHVarfinDer2::checkHaplotypeBuildPossibilityAndBuildSomaticHaplotype(std::vector<Haplotype> &haps, std::vector<Haplotype> &haps_ref,
+bool OHVarfinDer::checkHaplotypeBuildPossibilityAndBuildSomaticHaplotype(std::vector<Haplotype> &haps, std::vector<Haplotype> &haps_ref,
                                                        const std::vector<Haplotype> &normalHaps,  const std::vector<Haplotype> &refHaps,
                                                        const CandidateWindow &window, const std::vector<Variant> &closeVariantsForFetchingReads, std::string chr,
                                                        const std::vector<IRead *> &allTumorReads, const std::vector<IRead *> &allNormalReads){
@@ -422,7 +422,7 @@ bool OHVarfinDer2::checkHaplotypeBuildPossibilityAndBuildSomaticHaplotype(std::v
     return true;
 }
 
-void OHVarfinDer2::buildHapPaires(std::vector<std::pair<Haplotype, Haplotype> > &hapPairs,
+void OHVarfinDer::buildHapPaires(std::vector<std::pair<Haplotype, Haplotype> > &hapPairs,
                                   std::vector<std::pair<Haplotype, Haplotype> > &hapPairsBasic,
                                   const std::vector<Haplotype> &hapsWithSNP, const std::vector<Haplotype> &hapsWithoutSNP){
     std::pair<Haplotype, Haplotype > hapRRefRef; hapRRefRef.first = hapsWithoutSNP[0]; hapRRefRef.second = hapsWithoutSNP[0];
@@ -497,7 +497,7 @@ void OHVarfinDer2::buildHapPaires(std::vector<std::pair<Haplotype, Haplotype> > 
     }
 }
 
-bool OHVarfinDer2::isBFWithHapComputable(bool isHaplotypeGoodState, HaplotypeBuilder::State state, MutationCallResult &result){
+bool OHVarfinDer::isBFWithHapComputable(bool isHaplotypeGoodState, HaplotypeBuilder::State state, MutationCallResult &result){
     if( !isHaplotypeGoodState ){
         LOG(logERROR) << "something wrong state is already set" << std::endl;
     }else if( state == HaplotypeBuilder::SOMETHING_WRONG){
@@ -515,6 +515,6 @@ bool OHVarfinDer2::isBFWithHapComputable(bool isHaplotypeGoodState, HaplotypeBui
     return false;
 }
 
-double OHVarfinDer2::getFactorFromLnToLog10(){
+double OHVarfinDer::getFactorFromLnToLog10(){
     return std::log10(std::exp(1.0));
 }

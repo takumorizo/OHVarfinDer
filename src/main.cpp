@@ -21,7 +21,7 @@
 #include "CandidateVariant.h"
 #include "CandidateWindow.h"
 #include "VariantUtils.h"
-#include "OHVarfinDer2.h"
+#include "OHVarfinDer.h"
 #include "BaseMutationCaller.h"
 #include "PileUpManager.h"
 #include "MutationCaller.h"
@@ -62,10 +62,10 @@ int main(int argc, const char *argv[]){
     // output Files
     std::ofstream outStream((parameters.outFilePrefix + ".calls.txt").c_str());
     
-    if(parameters.method == Parameters::OHVARFINDER2){
+    if(parameters.method == Parameters::OHVARFINDER){
         outStream << MutationCallResult::getHeader() << std::endl;
         LOG(logINFO) << " start Ohvarfinder2 algorithm" << std::endl;
-        OHVarfinDer2 caller = OHVarfinDer2(tumorBamReader, normalBamReader,parameters,fai);
+        OHVarfinDer caller = OHVarfinDer(tumorBamReader, normalBamReader,parameters,fai);
         
         for(int i = 0; i < allWindows.size(); i++){
             try {
