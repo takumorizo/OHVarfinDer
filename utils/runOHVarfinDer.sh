@@ -61,7 +61,7 @@ echo "${DIR}/../bin/ohvarfinder \
 -f ${REF}    \
 -a ${TUMOR}  \
 -b ${NORMAL} \
--o ${OUTPUTDIR} \
+-o ${OUTPUTDIR}/output \
 --maxInsertSize=${maxInsertSize} \
 --tumorMinDepth=${tumorMinDepth} \
 --tumorMinObsRate=${tumorMinObsRate} \
@@ -96,6 +96,8 @@ echo "${DIR}/../bin/ohvarfinder \
 --heteroSNPMinAvgBaseQuality=${heteroSNPMinAvgBaseQuality} \
 --triAlleleMinObsRate=${triAlleleMinObsRate} \
 --triAlleleMinObsNum=${triAlleleMinObsNum} \
+--averageMapPhredQualThreshold=${averageMapPhredQualThreshold} \
+--softClipPosessionFreqThreshold=${softClipPosessionFreqThreshold} \
 --pileUpBufferSize=${pileUpBufferSize} \
 ${isSingle} \
 -R ${REGION}"
@@ -139,6 +141,8 @@ ${DIR}/../bin/ohvarfinder \
 --heteroSNPMinAvgBaseQuality=${heteroSNPMinAvgBaseQuality} \
 --triAlleleMinObsRate=${triAlleleMinObsRate} \
 --triAlleleMinObsNum=${triAlleleMinObsNum} \
+--averageMapPhredQualThreshold=${averageMapPhredQualThreshold} \
+--softClipPosessionFreqThreshold=${softClipPosessionFreqThreshold} \
 --pileUpBufferSize=${pileUpBufferSize} \
 ${isSingle} \
 -R ${REGION}

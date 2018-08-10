@@ -6,7 +6,6 @@ import re
 
 
 def main():
-    argvs = sys.argv
     for line in sys.stdin:
         line = line.replace('\n','')
         line = line.replace('\r','')

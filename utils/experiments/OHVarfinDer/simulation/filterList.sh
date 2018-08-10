@@ -1,8 +1,10 @@
 #! /bin/bash
 
-declare -a filterArray=()
+declare -a filterArray=(\
+"something_wrong" \
+)
 
-filterExpression=""
-for ((i = 0; i < ${#filterArray[@]}; i++)) {
-	filterExpression=" | grep -v ${filterArray[i]}"
+filterExpression="${filterArray[0]}"
+for ((i = 1; i < ${#filterArray[@]}; i++)) {
+	filterExpression="${filterExpression}|${filterArray[i]}"
 }

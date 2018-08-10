@@ -1,23 +1,34 @@
 #! /bin/bash
-#$ -S /bin/sh
-#$ -cwd
-: <<'#__CO__'
-#__CO__
 
-OHVarTumorMinDepth=12
-OHVarTumorMinRate=0.05
-OHVarTumorMinObsNum=4
+maxInsertSize=1600
+tumorMinDepth=12
+tumorMinObsRate=0.05
+tumorMaxObsRate=1.0
+tumorMinObsNum=4
 
-OHVarNormalMinDepth=12
-OHVarNormalMaxRate=0.1
+normalMinDepth=12
+normalMaxObsRate=0.1
+normalMaxObsNum=1000000
 
-OHVarSNPMinDepth=15
-OHVarSNPMinRate=0.3
-OHVarSNPMinObsNum=10
+heteroSNPMinDepth=15
+heteroSNPMinObsRate=0.3
+heteroSNPMinObsNum=10
+
+triAlleleMinObsRate=0.03
+triAlleleMinObsNum=5
+
+averageMapPhredQualThreshold=0
+softClipPosessionFreqThreshold=1.0
+
+tumorMinAvgBaseQuality=0
+normalMinAvgBaseQuality=0
+heteroSNPMinAvgBaseQuality=0
 
 # If you can use single reads only, comment out this line.
 # isSingle=--singleReads
 isSingle=
+
+pileUpBufferSize=4000000
 
 ohvar_mutGammaF=10.0,1.0
 ohvar_mutGammaH=5.0,5.0,1.0
