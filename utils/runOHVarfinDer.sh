@@ -22,7 +22,7 @@ Output dir : ${OUTPUTDIR}
 Parameter  : ${PARAM}
 Filter     : ${FILTER}
 Region     : ${REGION}
-Thresold   : ${MINSCORE}
+Threshold  : ${MINSCORE}
 "
 
 
