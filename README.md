@@ -45,13 +45,6 @@ The above script uses pysam. Please make sure that pysam(https://pysam.readthedo
 pip install pysam
 ```
 
-Post filtering recommendation
-----------
-We recommend to remove the following low mapping positions or SNP positions from the outputs.
-* genomic super duplications: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/simpleRepeat.txt.gz
-* simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
-* dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
-
 <!-- Convert to VCF
 ----------
 
@@ -73,7 +66,6 @@ We recommend to remove the following low mapping positions or SNP positions from
 * genomic super duplications: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/simpleRepeat.txt.gz
 * simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
 * dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
-
 
 Publication
 ----------
