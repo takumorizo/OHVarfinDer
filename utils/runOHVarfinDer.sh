@@ -18,10 +18,11 @@ echo "
 Reference  : ${REF}
 Tumor bam  : ${TUMOR}
 Normal bam : ${NORMAL}
-OUTPUTDIR  : ${OUTPUTDIR}
-parameter  : ${PARAM}
-filter     : ${FILTER}
-region     : ${REGION}
+Output dir : ${OUTPUTDIR}
+Parameter  : ${PARAM}
+Filter     : ${FILTER}
+Region     : ${REGION}
+Thresold   : ${MINSCORE}
 "
 
 
