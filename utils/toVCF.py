@@ -59,6 +59,8 @@ def main():
             lineCols = re.split('\t',line)
 
             Chr, start, end, ref, obs = lineCols[0], int(lineCols[1]), int(lineCols[2]), lineCols[3], lineCols[4]
+            if lineCols[22] == '-':
+                continue
             refT, obsT, refN, obsN, BFScore = int(lineCols[5]), int(lineCols[6]), int(lineCols[7]), int(lineCols[8]), float(lineCols[22])
             outputList.extend(convertToVCFVariant(Chr, start, end, ref, obs, fastaObj))
             outputList.extend([BFScore, '.', 'RCT='+str(refT)+';ACT='+str(obsT)+';RCN='+str(refN)+';ACN='+str(obsN)])

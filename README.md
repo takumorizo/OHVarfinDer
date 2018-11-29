@@ -60,6 +60,11 @@ We recommend to remove the following low mapping positions or SNP positions from
 * simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
 * dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
 
+Scoring threshold recommendation
+----------
+We recommend to use the following threshold to collect somatic SNVs and INDELs from the output vcf.
+QUAL >= 0.5
+
 
 Publication
 ----------
