@@ -30,25 +30,17 @@ How to run
 ----------
 
 ```sh
-sh ./utils/runOHVarfinDer.sh ${referenceSequence} ${tumorBam} ${normalBam} ${outputDir} ${region}
+sh ./utils/runOHVarfinDer.sh ${referenceSequence} ${tumorBam} ${normalBam} ${outputDir} ${region} ${minScore}
 ```
-referenceSequence : The reference sequence used for generating ${tumorBam} and ${normalBam}  
-tumorBam: The bam file for tumor sample.  
-normalBam: The bam file for normal sample.  
-outputDir : Output files of ${outputDir}/output.variant, ${outputDir}/output.filt.variant is generated  
-region : ex) chr1:1-1000, same as samtools mpileup region specification.  
+referenceSequence : The reference sequence used for generating ${tumorBam} and ${normalBam}
+tumorBam: The bam file for tumor sample.
+normalBam: The bam file for normal sample.
+outputDir : Output files of ${outputDir}/output.variant.vcf is generated
+region : ex) chr1:1-1000, same as samtools mpileup region specification.
+minScore: Minimum log_10 Bayes factor threshold. If not set, 0.5 is used for collecting somatic SNVs and short INDELs.
+(We checked that the minScore value of 0.5 at least works well for CLL samples in ICGC gold standard data set in https://www.nature.com/articles/ncomms10001.)
 
-Convert to VCF
-----------
-
-```sh
-python ./utils/toVCF.py ${referenceSequence} ${output} ${outputVCF}
-```
-referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}  
-output : An output file of ${outputDir}/output.variant or ${outputDir}/output.filt.variant  
-outputVCF : An output VCF file path.  
-
-The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.  
+The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
 ```sh
 pip install pysam
 ```
@@ -60,10 +52,27 @@ We recommend to remove the following low mapping positions or SNP positions from
 * simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
 * dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
 
-Scoring threshold recommendation
+<!-- Convert to VCF
 ----------
-We recommend to use the following threshold to collect somatic SNVs and INDELs from the output vcf.
-QUAL >= 0.5
+
+```sh
+python ./utils/toVCF.py ${referenceSequence} ${output} ${outputVCF}
+```
+referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
+output : An output file of ${outputDir}/output.variant or ${outputDir}/output.filt.variant
+outputVCF : An output VCF file path.
+
+The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
+```sh
+pip install pysam
+```
+ -->
+Post filtering recommendation
+----------
+We recommend to remove the following low mapping positions or SNP positions from the outputs.
+* genomic super duplications: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/simpleRepeat.txt.gz
+* simple repeats: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/genomicSuperDups.txt.gz
+* dbSNP138: http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/snp138.txt.gz
 
 
 Publication
