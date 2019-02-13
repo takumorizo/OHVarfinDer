@@ -30,6 +30,7 @@
 #define READINDELERRORMODEL_HPP_
 
 #include <vector>
+#include <iostream>
 
 class ReadIndelErrorModel {
 public:

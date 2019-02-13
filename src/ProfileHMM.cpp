@@ -105,6 +105,20 @@ ProfileHMM::ProfileHMM(const Haplotype &_hap,
     }
     
     initInsStartProb();
+
+    int idxMin    = 2 * (anchor - startSearchWindowSize);
+    int idxMax    = 2 * (anchor + startSearchWindowSize + readSeq.size() - 1) + (insT - 1);
+    int idxActual = 2 * ((int)hapSeq.size() + 1);
+    if ( !( 0 <= idxMin && idxMin < idxActual && 0 <= idxMax && idxMax < idxActual) ){
+        throw std::string("bug in profileHMM");
+    }
+
+    int xMin    = (anchor - startSearchWindowSize);
+    int xMax    = (anchor + startSearchWindowSize + readSeq.size() - 1);
+    int xActual =  ((int)hapSeq.size());
+    if ( !( 0 <= xMin && xMin < xActual && 0 <= xMax && xMax < xActual) ){
+        throw std::string("bug in profileHMM");
+    }
 }
 
 // get the transition history of read position b, X=x, insertion state I=i

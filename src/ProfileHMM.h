@@ -16,6 +16,10 @@
 #include "Haplotype.hpp"
 #include "Alignment.h"
 
+// #include <sstream>
+// #define TO_STRING(VariableName) # VariableName
+// #define SSTR( x ) dynamic_cast< std::ostringstream & >( ( std::ostringstream() << std::dec << x ) ).str()
+
 class ProfileHMM {
 public:
     ProfileHMM(const Haplotype &_hap,
@@ -67,6 +71,38 @@ private:
     inline int idxDelta(int x, int i, std::vector<double> delta);
     inline std::pair<int, int>from_idxDelta(int idx, int base, std::vector<double> delta);
     std::vector<Variant> getVariants();
+
+    // void printVariables(){
+    //     std::cerr << "anchor: " << anchor << std::endl;
+    //     std::cerr << "startSearchWindowSize: " << startSearchWindowSize << std::endl;
+    //     std::cerr << "readSeq.size(): " << readSeq.size() << std::endl;
+    //     std::cerr << "insT: " << insT << std::endl;
+    //     std::cerr << "idx min:" << 2 * (anchor - startSearchWindowSize) << std::endl;
+    //     std::cerr << "idx max:" << 2 * (anchor + startSearchWindowSize + readSeq.size() -1) + (insT - 1) << std::endl;
+    //     std::cerr << "idx actual: " << 2*((int)hapSeq.size() + 1) << std::endl;
+
+    //     if (onReverseStrand){
+    //         std::cerr << "onReverse: " << std::endl;
+    //         std::cerr << "haplotype.getStartPosInGenome(): " << haplotype.getStartPosInGenome() << std::endl;
+    //         std::cerr << "(int)hapSeq.length(): " << (int)hapSeq.length() << std::endl;
+    //         std::cerr << "leftMostPos: " << leftMostPos << std::endl;
+    //         std::cerr << "(int)readSeq.length(): "<< (int)readSeq.length() << std::endl;
+    //     }else{
+    //         std::cerr << "onForward: " << std::endl;
+    //         std::cerr << "haplotype.getStartPosInGenome(): " << haplotype.getStartPosInGenome() << std::endl;
+    //         std::cerr << "leftMostPos: " << leftMostPos << std::endl;
+    //     }
+    // }
+
+    // template <typename vec> void sizeCheck(vec v, int i, std::string name, std::string line) {
+    //     if (v.size() <= i){
+    //         std::cerr << "Out of bounds, at line: " << line << std::endl;
+    //         std::cerr << "vector name: " << name << std::endl;
+    //         std::cerr << "vector size: " << v.size() << std::endl;
+    //         std::cerr << "vector access at: " << i << std::endl;
+    //         printVariables();
+    //     }
+    // }
 };
 
 #endif /* defined(__ProfileHMM__) */

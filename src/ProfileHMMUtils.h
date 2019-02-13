@@ -15,6 +15,7 @@
 #include "Parameters.h"
 #include <utility>
 #include "log.h"
+#include <stdexcept>
 
 class ProfileHMMUtils {
 public:
@@ -80,9 +81,13 @@ public:
     }
     
     static inline double calc(const Haplotype &hap, const SamRead *sam) {
-        ProfileHMM pHMM0 = genProfileHMM(hap, sam);
-        Alignment a0 = pHMM0.viterbi();
-        return a0.likelihood;
+        try{
+            ProfileHMM pHMM0 = genProfileHMM(hap, sam);
+            Alignment a0 = pHMM0.viterbi();
+            return a0.likelihood;
+        } catch (...) {
+            throw std::string("bug in profileHMM");
+        }
         /* TODO
         int th1 = -100, th2 = -200;
         if (a0.likelihood > th1) {
