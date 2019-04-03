@@ -7,9 +7,10 @@ readonly TUMOR=$2
 readonly NORMAL=$3
 readonly OUTPUTDIR=$4
 readonly REGION=${5-""}
-readonly MINSCORE=${6-0.5}
-readonly PARAM=${7-${DIR}/params/params.sh}
-readonly FILTER=${8-${DIR}/params/filterList.sh}
+readonly TAG=${6-tumor}
+readonly MINSCORE=${7-0.5}
+readonly PARAM=${8-${DIR}/params/params.sh}
+readonly FILTER=${9-${DIR}/params/filterList.sh}
 
 source ${PARAM}
 source ${FILTER}
@@ -19,12 +20,12 @@ Reference  : ${REF}
 Tumor bam  : ${TUMOR}
 Normal bam : ${NORMAL}
 Output dir : ${OUTPUTDIR}
+Region     : ${REGION}
+Tag        : ${TAG}
+Threshold  : ${MINSCORE}
 Parameter  : ${PARAM}
 Filter     : ${FILTER}
-Region     : ${REGION}
-Threshold  : ${MINSCORE}
 "
-
 
 check_mkdir()
 {
@@ -150,26 +151,17 @@ ${DIR}/../bin/ohvarfinder \
 ${isSingle} \
 -R ${REGION}
 
-echo "cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.variant"
-cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rmSNP.py > ${OUTPUTDIR}/output.variant
+echo "cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rm_snp.py > ${OUTPUTDIR}/output.variant"
+cat ${OUTPUTDIR}/output.calls.txt | grep -E -v ${filterExpression} | python ${DIR}/rm_snp.py > ${OUTPUTDIR}/output.variant
 
-echo "python ${DIR}/toVCF.py ${REF} ${OUTPUTDIR}/output.variant ${OUTPUTDIR}/output.variant.temp.vcf"
-python ${DIR}/toVCF.py ${REF} ${OUTPUTDIR}/output.variant ${OUTPUTDIR}/output.variant.temp.vcf
-
-echo "grep '#' ${OUTPUTDIR}/output.variant.temp.vcf > ${OUTPUTDIR}/output.variant.vcf"
-grep '#' ${OUTPUTDIR}/output.variant.temp.vcf > ${OUTPUTDIR}/output.variant.vcf
-
-echo "grep -v '#' ${OUTPUTDIR}/output.variant.temp.vcf | awk -v score=\"${MINSCORE}\" '{FS="\t"; if($6 > score){print $0}}' >> ${OUTPUTDIR}/output.variant.vcf"
-grep -v '#' ${OUTPUTDIR}/output.variant.temp.vcf | awk -v score="${MINSCORE}" '{FS="\t"; if($6 > score){print $0}}' >> ${OUTPUTDIR}/output.variant.vcf
+echo "python ${DIR}/to_vcf.py ${REF} ${OUTPUTDIR}/output.variant ${OUTPUTDIR}/output.variant.vcf ${TAG} ${MINSCORE}"
+python ${DIR}/to_vcf.py ${REF} ${OUTPUTDIR}/output.variant ${OUTPUTDIR}/output.variant.vcf ${TAG} ${MINSCORE}
 
 echo "rm ${OUTPUTDIR}/output.calls.txt"
 rm ${OUTPUTDIR}/output.calls.txt
 
 echo "rm ${OUTPUTDIR}/output.variant"
 rm ${OUTPUTDIR}/output.variant
-
-echo "rm ${OUTPUTDIR}/output.variant.temp.vcf"
-rm ${OUTPUTDIR}/output.variant.temp.vcf
 
 echo "rm ${OUTPUTDIR}/output.log"
 rm ${OUTPUTDIR}/output.log
