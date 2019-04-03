@@ -30,15 +30,16 @@ How to run
 ----------
 
 ```sh
-sh ./utils/runOHVarfinDer.sh ${referenceSequence} ${tumorBam} ${normalBam} ${outputDir} ${region} ${minScore}
+sh ./utils/run_ohvar.sh ${ref} ${tumor} ${normal} ${output_dir} ${region} ${tag} ${min_score}
 ```
-referenceSequence : The reference sequence used for generating ${tumorBam} and ${normalBam}
-tumorBam: The bam file for tumor sample.
-normalBam: The bam file for normal sample.
-outputDir : Output files of ${outputDir}/output.variant.vcf is generated
+ref : The reference sequence used for mapping reads of ${tumor} and ${normal}.
+tumor: The bam file for tumor sample.
+normal: The bam file for normal sample.
+output_dir : Output files of ${output_dir}/output.variant.vcf is generated.
 region : ex) chr1:1-1000, same as samtools mpileup region specification.
-minScore: Minimum log_10 Bayes factor threshold. If not set, 0.5 is used for collecting somatic SNVs and short INDELs.
-(We checked that the minScore value of 0.5 at least works well for CLL samples in ICGC gold standard data set in https://www.nature.com/articles/ncomms10001.)
+tag : The name of samples.
+min_score: Minimum log_10 Bayes factor threshold. If not set, 0.5 is used for collecting somatic SNVs and short INDELs.
+(We checked that the min_score value of 0.5 at least works well for CLL samples in ICGC gold standard data set in https://www.nature.com/articles/ncomms10001.)
 
 The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
 ```sh
@@ -51,8 +52,8 @@ pip install pysam
 ```sh
 python ./utils/toVCF.py ${referenceSequence} ${output} ${outputVCF}
 ```
-referenceSequence  : reference sequence used for generating ${tumorBam} and ${normalBam}
-output : An output file of ${outputDir}/output.variant or ${outputDir}/output.filt.variant
+referenceSequence  : reference sequence used for generating ${tumor} and ${normalBam}
+output : An output file of ${output_dir}/output.variant or ${output_dir}/output.filt.variant
 outputVCF : An output VCF file path.
 
 The above script uses pysam. Please make sure that pysam(https://pysam.readthedocs.io/en/latest/) is already installed.
