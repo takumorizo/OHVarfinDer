@@ -70,7 +70,7 @@ We recommend to remove the following low mapping positions or SNP positions from
 
 Publication
 ----------
-Under submission.
+Published at Bioinformatics (https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz233/5423180).
 
 License
 ----------
