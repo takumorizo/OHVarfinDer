@@ -28,7 +28,7 @@ Just execute the following script in your shell:
 
 How to run
 ----------
-
+After the compile step, the following script returns mutation call result in vcf format. (Ensure that ./bin/ohvarfinder is prepared.)
 ```sh
 sh ./utils/run_ohvar.sh ${ref} ${tumor} ${normal} ${output_dir} ${region} ${tag} ${min_score}
 ```
@@ -83,6 +83,11 @@ This implementation forked from the program [HapMuC][hapmuc] and [Dindel][dindel
 [dindel]: http://www.sanger.ac.uk/resources/software/dindel/
 [hapmuc]: https://github.com/usuyama/hapmuc
 
+Note: Dockerfile
+----------
+If you have problem in preparing build dependencies or building ohvarfinder, use Dockerfile to build and use it directly.
+
+<!--
 Note: installing @ HGC SHIROKANE super computer
 ----------
 If you have problem around preparing build dependencies, i.e., make dependencies, please try to compile dependencies at login node.
@@ -98,4 +103,4 @@ Just execute the following script in your shell after you qlogin:
 % qlogin
 % make
 ```
-
+ -->
